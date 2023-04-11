@@ -2,7 +2,6 @@ package routes
 
 import (
 	"contentservice/controller"
-	"contentservice/routes"
 	"github.com/gin-gonic/gin"
 )
 
@@ -16,7 +15,7 @@ func (hwr *HelloWorldRoute) Bind(e *gin.Engine) {
 	e.GET(hwr.Path+"/", helloWorldController.GetHelloWorld)
 }
 
-func NewHelloWorldRouter(path string) routes.Route {
+func NewHelloWorldRouter(path string) Route {
 	helloWorldRoute := &HelloWorldRoute{
 		Path: path,
 	}

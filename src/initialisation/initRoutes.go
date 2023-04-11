@@ -1,7 +1,7 @@
 package initialisation
 
 import (
-	"contentservice/routes/routes"
+	"contentservice/routes"
 	"github.com/gin-gonic/gin"
 )
 
