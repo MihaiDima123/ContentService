@@ -1,8 +1,8 @@
-package routes
+package impl
 
 import (
-	"contentservice/Interface"
 	"contentservice/controller"
+	"contentservice/routes"
 	"github.com/gin-gonic/gin"
 )
 
@@ -16,7 +16,7 @@ func (hwr *HelloWorldRoute) Bind(e *gin.Engine) {
 	e.GET(hwr.Path+"/", helloWorldController.GetHelloWorld)
 }
 
-func NewHelloWorldRouter(path string) Interface.Route {
+func NewHelloWorldRouter(path string) routes.Route {
 	helloWorldRoute := &HelloWorldRoute{
 		Path: path,
 	}
