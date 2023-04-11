@@ -1,8 +1,8 @@
 package main
 
 import (
-	"Rome/initialisation"
-	"Rome/initialisation/env"
+	"Rome/src/initialisation"
+	"Rome/src/initialisation/env"
 )
 
 func init() {

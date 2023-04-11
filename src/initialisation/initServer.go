@@ -1,7 +1,7 @@
 package initialisation
 
 import (
-	"Rome/initialisation/env"
+	"Rome/src/initialisation/env"
 	"fmt"
 	"github.com/gin-gonic/gin"
 )
@@ -9,7 +9,11 @@ import (
 var router *gin.Engine
 
 func InitServer() {
+	// Create the router
 	router = gin.Default()
+
+	// Bind the routes
+	InitRoutes(router)
 }
 
 func StartServer() {
