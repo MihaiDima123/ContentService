@@ -1,4 +1,4 @@
-package impl
+package routes
 
 import (
 	"contentservice/controller"

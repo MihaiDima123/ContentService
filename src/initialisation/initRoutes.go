@@ -1,10 +1,10 @@
 package initialisation
 
 import (
-	"contentservice/routes/impl"
+	"contentservice/routes/routes"
 	"github.com/gin-gonic/gin"
 )
 
 func InitRoutes(e *gin.Engine) {
-	impl.NewHelloWorldRouter("/hello-world").Bind(e)
+	routes.NewHelloWorldRouter("/hello-world").Bind(e)
 }
