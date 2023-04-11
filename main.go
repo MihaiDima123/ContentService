@@ -1,16 +1,15 @@
 package main
 
-import "Rome/initialisation"
+import (
+	"Rome/initialisation"
+	"Rome/initialisation/env"
+)
 
 func init() {
+	env.InitEnv()
 	initialisation.InitServer()
 }
 
 func main() {
-	myServer := GetRouter()
-
-	err := myServer.Run(":8080")
-	if err != nil {
-		return
-	}
+	initialisation.StartServer()
 }
