@@ -8,11 +8,7 @@ import (
 var router *gin.Engine
 
 func InitServer() {
-	// Create the router
 	router = gin.Default()
-
-	// Bind the routes
-	InitRoutes(router)
 }
 
 func StartServer() {

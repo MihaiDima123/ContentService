@@ -7,6 +7,7 @@ import (
 func init() {
 	initialisation.InitEnv()
 	initialisation.InitServer()
+	initialisation.InitRoutes()
 }
 
 func main() {
