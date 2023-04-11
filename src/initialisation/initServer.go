@@ -1,7 +1,6 @@
 package initialisation
 
 import (
-	"contentservice/initialisation/env"
 	"fmt"
 	"github.com/gin-gonic/gin"
 )
@@ -17,7 +16,7 @@ func InitServer() {
 }
 
 func StartServer() {
-	err := router.Run(getPort(env.Variables.AppPort))
+	err := router.Run(getPort(Variables.AppPort))
 	if err != nil {
 		return
 	}

@@ -1,10 +1,12 @@
-package env
+package initialisation
 
 import (
 	"github.com/joho/godotenv"
 	"os"
 	"strconv"
 )
+
+const appPortName string = "APP_PORT"
 
 type environment struct {
 	AppPort int64

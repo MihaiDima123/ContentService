@@ -2,11 +2,10 @@ package main
 
 import (
 	"contentservice/initialisation"
-	"contentservice/initialisation/env"
 )
 
 func init() {
-	env.InitEnv()
+	initialisation.InitEnv()
 	initialisation.InitServer()
 }
 
