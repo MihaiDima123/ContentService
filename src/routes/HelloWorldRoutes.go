@@ -1,8 +1,8 @@
 package routes
 
 import (
-	"Rome/src/Interface"
-	"Rome/src/controller"
+	"contentservice/Interface"
+	"contentservice/controller"
 	"github.com/gin-gonic/gin"
 )
 

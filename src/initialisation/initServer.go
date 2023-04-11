@@ -1,7 +1,7 @@
 package initialisation
 
 import (
-	"Rome/src/initialisation/env"
+	"contentservice/initialisation/env"
 	"fmt"
 	"github.com/gin-gonic/gin"
 )

@@ -1,4 +1,4 @@
-module Rome
+module contentservice
 
 go 1.20
 
