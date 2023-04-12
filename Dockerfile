@@ -2,8 +2,8 @@ FROM golang:latest
 
 WORKDIR /usr/src/app
 
-COPY src/go.mod ./
-COPY src/go.sum ./
+COPY go.mod ./
+COPY go.sum ./
 COPY .env ./
 
 RUN go mod download && go mod verify

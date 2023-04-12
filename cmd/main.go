@@ -7,7 +7,10 @@ import (
 func init() {
 	initialisation.InitEnv()
 	initialisation.InitServer()
-	initialisation.InitRoutes()
+
+	// Routes + datasource
+	ds := initialisation.InitDatasource()
+	initialisation.InitRoutes(ds)
 }
 
 func main() {

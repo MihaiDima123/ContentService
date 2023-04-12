@@ -12,7 +12,7 @@ func InitServer() {
 }
 
 func StartServer() {
-	err := router.Run(getPort(Variables.AppPort))
+	err := router.Run(getPort(variables.AppPort))
 	if err != nil {
 		return
 	}
