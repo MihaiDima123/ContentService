@@ -21,3 +21,6 @@
 go.work
 .idea
 .env
+
+# Local db data -- persist
+localdb/data

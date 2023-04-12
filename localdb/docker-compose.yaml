@@ -6,6 +6,10 @@ services:
   db:
     image: postgres
     restart: always
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./data:/var/lib/postgresql/data
     environment:
       POSTGRES_DB: content
       POSTGRES_USER: root
