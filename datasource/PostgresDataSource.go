@@ -2,7 +2,6 @@ package datasource
 
 import (
 	"github.com/jackc/pgx"
-	_ "github.com/jackc/pgx"
 )
 
 type PostgresDataSource struct {
