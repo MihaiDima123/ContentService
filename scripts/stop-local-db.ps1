@@ -1,0 +1,1 @@
+docker compose -f "localdb/docker-compose.yaml" down
