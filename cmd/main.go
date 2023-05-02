@@ -1,18 +1,12 @@
 package main
 
 import (
-	"contentservice/initialisation"
+	int2 "contentservice/application"
 )
 
-func init() {
-	initialisation.InitEnv()
-	initialisation.InitServer()
-
-	// Routes + datasource
-	ds := initialisation.InitDatasource()
-	initialisation.InitRoutes(ds)
-}
-
 func main() {
-	initialisation.StartServer()
+	app := int2.DefaultApp()
+	app.Configure()
+
+	app.Start()
 }
