@@ -5,7 +5,6 @@ import (
 )
 
 type Server interface {
-	ConfigureServer(port int64)
-	StartServer()
+	StartServer(port uint16)
 	GetRouter() *gin.Engine
 }

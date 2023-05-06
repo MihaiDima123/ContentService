@@ -28,24 +28,23 @@ func (ds *PostgresDataSource) Configure() {
 	})
 
 	if err != nil {
+		// TODO: Panic it's not good, handle your feelings (add a logger)
 		panic(err)
 	}
 
 	ds.Conn = conn
 	fmt.Println(ds.Conn)
-
 }
 
-func (ds *PostgresDataSource) Initialize() Datasource {
-	appDatasource := NewPostgresDataSource(ds.configuration)
-	appDatasource.Configure()
+func (ds *PostgresDataSource) Initialize(configuration Configuration) Datasource {
+	appDatasource := &PostgresDataSource{
+		configuration: configuration,
+	}
 
+	appDatasource.Configure()
 	return appDatasource
 }
 
-func NewPostgresDataSource(configuration Configuration) Datasource {
-	pgDataSource := PostgresDataSource{}
-	pgDataSource.configuration = configuration
-
-	return &pgDataSource
+func NewPostgresDataSource() Datasource {
+	return new(PostgresDataSource)
 }

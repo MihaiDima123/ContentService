@@ -3,9 +3,8 @@ package datasource
 import "github.com/jackc/pgx"
 
 type Datasource interface {
-	Configure()
 	GetConnection() *pgx.ConnPool
-	Initialize() Datasource
+	Initialize(configuration Configuration) Datasource
 }
 
 type Configuration struct {

@@ -6,17 +6,11 @@ import (
 )
 
 type ContentServer struct {
-	Port   int64
 	Router *gin.Engine
 }
 
-func (server *ContentServer) ConfigureServer(port int64) {
-	server.Port = port
-	server.Router = gin.Default()
-}
-
-func (server *ContentServer) StartServer() {
-	err := server.Router.Run(helpers.GetPort(server.Port))
+func (server *ContentServer) StartServer(port uint16) {
+	err := server.Router.Run(helpers.GetPort(port))
 	if err != nil {
 		return
 	}
@@ -27,5 +21,8 @@ func (server *ContentServer) GetRouter() *gin.Engine {
 }
 
 func NewContentServer() Server {
-	return &ContentServer{}
+	server := new(ContentServer)
+	server.Router = gin.Default()
+
+	return server
 }

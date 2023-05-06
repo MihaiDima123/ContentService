@@ -1,4 +1,4 @@
-package restful_controllers
+package core
 
 import (
 	"github.com/jackc/pgx"
@@ -9,5 +9,4 @@ type Options struct {
 }
 
 type RestController interface {
-	Configure(options Options)
 }

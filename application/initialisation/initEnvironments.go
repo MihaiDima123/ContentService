@@ -14,7 +14,7 @@ const datasourceUser string = "DATASOURCE_USER"
 const datasourcePassword string = "DATASOURCE_PASSWORD"
 
 type Environment struct {
-	AppPort            int64
+	AppPort            uint16
 	DatasourceHost     string
 	DatasourcePort     uint16
 	DatasourceDatabase string
@@ -22,7 +22,7 @@ type Environment struct {
 	DatasourcePassword string
 }
 
-func InitEnv() *Environment {
+func InitEnv() Environment {
 	// Loads .env file
 	err := godotenv.Load()
 	if err != nil {
@@ -32,23 +32,21 @@ func InitEnv() *Environment {
 }
 
 // Create the object
-func getEnvs() *Environment {
-	envs := Environment{
+func getEnvs() Environment {
+	return Environment{
 		AppPort:            parseIntEnv(os.Getenv(appPortName)),
 		DatasourceHost:     os.Getenv(datasourceHost),
-		DatasourcePort:     uint16(parseIntEnv(os.Getenv(datasourcePort))),
+		DatasourcePort:     parseIntEnv(os.Getenv(datasourcePort)),
 		DatasourceDatabase: os.Getenv(datasourceDatabase),
 		DatasourceUser:     os.Getenv(datasourceUser),
 		DatasourcePassword: os.Getenv(datasourcePassword),
 	}
-
-	return &envs
 }
 
-func parseIntEnv(envValue string) int64 {
+func parseIntEnv(envValue string) uint16 {
 	parsedVariable, err := strconv.ParseInt(envValue, 10, 0)
 	if err != nil {
 		panic(err)
 	}
-	return parsedVariable
+	return uint16(parsedVariable)
 }

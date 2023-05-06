@@ -1,12 +1,10 @@
 package main
 
 import (
-	int2 "contentservice/application"
+	"contentservice/application"
 )
 
 func main() {
-	app := int2.DefaultApp()
-	app.Configure()
-
+	app := application.NewDefaultApp().Configure()
 	app.Start()
 }
