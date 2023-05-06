@@ -2,13 +2,18 @@ package impl
 
 import (
 	"contentservice/application/modules/content/repository"
+	"contentservice/application/modules/content/services"
 )
 
 type ContentServiceImpl struct {
 	contentRepository repository.ContentRepository
 }
 
-func NewContentService(contentRepository repository.ContentRepository) ContentServiceImpl {
+func (c ContentServiceImpl) Test() {
+	c.contentRepository.Test()
+}
+
+func NewContentService(contentRepository repository.ContentRepository) services.ContentService {
 	return ContentServiceImpl{
 		contentRepository: contentRepository,
 	}

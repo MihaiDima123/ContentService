@@ -9,13 +9,14 @@ type RestfulContentController struct {
 	contentService services.ContentService
 }
 
-func NewContentController(cs services.ContentService) RestfulContentController {
+func NewContentController(service services.ContentService) RestfulContentController {
 	return RestfulContentController{
-		contentService: cs,
+		contentService: service,
 	}
 }
 
 func (rcc *RestfulContentController) GetHelloWorld(context *gin.Context) {
+	rcc.contentService.Test()
 	_, err := context.Writer.Write([]byte("Hi"))
 	if err != nil {
 		panic(err)

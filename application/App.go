@@ -3,9 +3,9 @@ package application
 import (
 	"contentservice/application/initialisation"
 	"contentservice/application/modules/content"
+	"contentservice/application/modules/core"
 	"contentservice/datasource"
 	"contentservice/server"
-	"contentservice/server/restful/core"
 )
 
 type App struct {
