@@ -23,4 +23,4 @@ go.work
 .env
 
 # Local db data -- persist
-localdb/data
+local_db/data

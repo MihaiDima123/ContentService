@@ -1,7 +1,7 @@
 package server
 
 import (
-	"contentservice/helpers"
+	"fmt"
 	"github.com/gin-gonic/gin"
 )
 
@@ -10,7 +10,7 @@ type ContentServer struct {
 }
 
 func (server *ContentServer) StartServer(port uint16) {
-	err := server.Router.Run(helpers.GetPort(port))
+	err := server.Router.Run(fmt.Sprintf(":%d", port))
 	if err != nil {
 		return
 	}
