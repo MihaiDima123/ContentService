@@ -20,7 +20,7 @@ func (app *App) Configure() *App {
 	app.environments = initialisation.InitEnv() // Init the environments
 	app.DataSource = app.getDataSource()        // Then the data source
 
-	app.Server = server.NewContentServer()
+	app.Server = server.NewServer()
 
 	content.NewContentModule().Use(&restful.ModuleConfiguration{
 		Datasource: app.DataSource,
