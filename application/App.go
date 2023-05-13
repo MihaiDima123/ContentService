@@ -1,8 +1,8 @@
 package application
 
 import (
-	"contentservice/application/core"
 	"contentservice/application/initialisation"
+	"contentservice/application/modules"
 	"contentservice/application/modules/content"
 	"contentservice/datasource"
 	"contentservice/server"
@@ -20,7 +20,7 @@ func (app *App) Configure() *App {
 
 	app.Server = server.NewContentServer()
 
-	content.NewContentModule().Use(&core.ModuleConfiguration{
+	content.NewContentModule().Use(&modules.ModuleConfiguration{
 		Datasource: app.DataSource,
 		Router:     *app.Server.GetRouter(),
 	})

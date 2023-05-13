@@ -1,7 +1,7 @@
 package impl
 
 import (
-	"contentservice/application/core"
+	"contentservice/application/modules"
 	"contentservice/application/modules/content/repository"
 	"github.com/jackc/pgx"
 )
@@ -21,6 +21,6 @@ func NewContentRepository() repository.ContentRepository {
 	return new(ContentRepositoryImpl)
 }
 
-func (cr *ContentRepositoryImpl) Configure(configuration core.RepositoryConfiguration) {
+func (cr *ContentRepositoryImpl) Configure(configuration modules.RepositoryConfiguration) {
 	cr.dbConn = configuration.Connection
 }

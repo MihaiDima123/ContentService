@@ -1,4 +1,4 @@
-package core
+package modules
 
 import (
 	"github.com/jackc/pgx"

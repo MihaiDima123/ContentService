@@ -1,4 +1,4 @@
-package core
+package restful
 
 import (
 	"github.com/jackc/pgx"

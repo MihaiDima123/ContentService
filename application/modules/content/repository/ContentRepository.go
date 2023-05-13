@@ -1,10 +1,10 @@
 package repository
 
 import (
-	"contentservice/application/core"
+	"contentservice/application/modules"
 )
 
 type ContentRepository interface {
 	Test()
-	Configure(configuration core.RepositoryConfiguration)
+	Configure(configuration modules.RepositoryConfiguration)
 }
