@@ -18,12 +18,7 @@ func (app *App) Configure() *App {
 	app.environments = initialisation.InitEnv() // Init the environments
 	app.DataSource = app.getDataSource()        // Then the data source
 
-	/*
-		Then the server - I have just one but just in case this part will allow migrating to a new api version inside this
-		project cause why not, maybe a feature switch added a TODO: Feature switch
-	*/
 	app.Server = server.NewContentServer()
-	// Should work on its own please don't add anything more to that class thanks
 
 	content.NewContentModule().Use(&core.ModuleConfiguration{
 		Datasource: app.DataSource,
