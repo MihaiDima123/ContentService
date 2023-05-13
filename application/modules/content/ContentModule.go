@@ -4,8 +4,8 @@ import (
 	repoImpl "contentservice/application/modules/content/repository/impl"
 	"contentservice/application/modules/content/services/impl"
 	"contentservice/application/modules/core"
+	"contentservice/application/restful/content"
 	"contentservice/datasource"
-	"contentservice/server/restful/content"
 )
 
 type CntModule struct {
