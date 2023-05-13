@@ -1,26 +1,26 @@
 package content
 
 import (
-	"contentservice/application/modules"
-	repoImpl "contentservice/application/modules/content/repository/impl"
-	"contentservice/application/modules/content/services/impl"
-	"contentservice/application/restful/content"
-	"contentservice/datasource"
+	repoImpl "contentservice/pkg/application/modules/content/repository/impl"
+	"contentservice/pkg/application/modules/content/services/impl"
+	"contentservice/pkg/application/restful/content"
+	"contentservice/pkg/interfaces/ds"
+	"contentservice/pkg/interfaces/restful"
 )
 
 type CntModule struct {
 	Controller content.RestfulContentController
 }
 
-func (c *CntModule) Use(configuration *modules.ModuleConfiguration) {
+func (c *CntModule) Use(configuration *restful.ModuleConfiguration) {
 	c.init(configuration.Datasource)
 
 	configuration.Router.GET("/", c.Controller.GetHelloWorld)
 }
 
-func (c *CntModule) init(datasource datasource.Datasource) {
+func (c *CntModule) init(datasource ds.Datasource) {
 	contentRepository := repoImpl.NewContentRepository()
-	contentRepository.Configure(modules.RepositoryConfiguration{
+	contentRepository.Configure(restful.RepositoryConfiguration{
 		Connection: *datasource.GetConnection(),
 	})
 
@@ -31,6 +31,6 @@ func (c *CntModule) init(datasource datasource.Datasource) {
 	c.Controller = contentController
 }
 
-func NewContentModule() modules.Module {
+func NewContentModule() restful.Module {
 	return new(CntModule)
 }

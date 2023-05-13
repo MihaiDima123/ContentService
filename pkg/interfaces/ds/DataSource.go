@@ -1,4 +1,4 @@
-package datasource
+package ds
 
 import "github.com/jackc/pgx"
 

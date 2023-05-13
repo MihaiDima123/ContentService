@@ -1,7 +1,7 @@
 package main
 
 import (
-	"contentservice/application"
+	"contentservice/pkg/application"
 )
 
 func main() {

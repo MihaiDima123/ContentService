@@ -1,7 +1,7 @@
 package content
 
 import (
-	"contentservice/application/modules/content/services"
+	"contentservice/pkg/application/modules/content/services"
 	"github.com/gin-gonic/gin"
 )
 

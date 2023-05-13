@@ -1,12 +1,13 @@
 package datasource
 
 import (
+	"contentservice/pkg/interfaces/ds"
 	"fmt"
 	"github.com/jackc/pgx"
 )
 
 type PostgresDataSource struct {
-	configuration Configuration
+	configuration ds.Configuration
 	Conn          *pgx.ConnPool
 }
 
@@ -36,7 +37,7 @@ func (ds *PostgresDataSource) Configure() {
 	fmt.Println(ds.Conn)
 }
 
-func (ds *PostgresDataSource) Initialize(configuration Configuration) Datasource {
+func (ds *PostgresDataSource) Initialize(configuration ds.Configuration) ds.Datasource {
 	appDatasource := &PostgresDataSource{
 		configuration: configuration,
 	}
@@ -45,6 +46,6 @@ func (ds *PostgresDataSource) Initialize(configuration Configuration) Datasource
 	return appDatasource
 }
 
-func NewPostgresDataSource() Datasource {
+func NewPostgresDataSource() ds.Datasource {
 	return new(PostgresDataSource)
 }

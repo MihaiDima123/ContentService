@@ -1,8 +1,8 @@
 package impl
 
 import (
-	"contentservice/application/modules/content/repository"
-	"contentservice/application/modules/content/services"
+	"contentservice/pkg/application/modules/content/repository"
+	"contentservice/pkg/application/modules/content/services"
 )
 
 type ContentServiceImpl struct {

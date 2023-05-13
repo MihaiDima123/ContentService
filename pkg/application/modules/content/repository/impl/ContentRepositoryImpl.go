@@ -1,8 +1,8 @@
 package impl
 
 import (
-	"contentservice/application/modules"
-	"contentservice/application/modules/content/repository"
+	"contentservice/pkg/application/modules/content/repository"
+	"contentservice/pkg/interfaces/restful"
 	"github.com/jackc/pgx"
 )
 
@@ -21,6 +21,6 @@ func NewContentRepository() repository.ContentRepository {
 	return new(ContentRepositoryImpl)
 }
 
-func (cr *ContentRepositoryImpl) Configure(configuration modules.RepositoryConfiguration) {
+func (cr *ContentRepositoryImpl) Configure(configuration restful.RepositoryConfiguration) {
 	cr.dbConn = configuration.Connection
 }

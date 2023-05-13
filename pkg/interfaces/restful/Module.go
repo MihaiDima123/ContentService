@@ -1,7 +1,7 @@
-package modules
+package restful
 
 import (
-	"contentservice/datasource"
+	"contentservice/pkg/interfaces/ds"
 	"github.com/gin-gonic/gin"
 )
 
@@ -10,6 +10,6 @@ type Module interface {
 }
 
 type ModuleConfiguration struct {
-	Datasource datasource.Datasource
+	Datasource ds.Datasource
 	Router     gin.Engine
 }

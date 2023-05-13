@@ -1,16 +1,18 @@
 package application
 
 import (
-	"contentservice/application/initialisation"
-	"contentservice/application/modules"
-	"contentservice/application/modules/content"
-	"contentservice/datasource"
-	"contentservice/server"
+	"contentservice/pkg/application/initialisation"
+	"contentservice/pkg/application/modules/content"
+	"contentservice/pkg/datasource"
+	"contentservice/pkg/interfaces/ds"
+	"contentservice/pkg/interfaces/restful"
+	server2 "contentservice/pkg/interfaces/server"
+	"contentservice/pkg/server"
 )
 
 type App struct {
-	Server       server.Server
-	DataSource   datasource.Datasource
+	Server       server2.Server
+	DataSource   ds.Datasource
 	environments initialisation.Environment
 }
 
@@ -20,7 +22,7 @@ func (app *App) Configure() *App {
 
 	app.Server = server.NewContentServer()
 
-	content.NewContentModule().Use(&modules.ModuleConfiguration{
+	content.NewContentModule().Use(&restful.ModuleConfiguration{
 		Datasource: app.DataSource,
 		Router:     *app.Server.GetRouter(),
 	})
@@ -32,8 +34,8 @@ func (app *App) Start() {
 	app.Server.StartServer(app.environments.AppPort)
 }
 
-func (app *App) getDataSource() datasource.Datasource {
-	return datasource.NewPostgresDataSource().Initialize(datasource.Configuration{
+func (app *App) getDataSource() ds.Datasource {
+	return datasource.NewPostgresDataSource().Initialize(ds.Configuration{
 		Host:     app.environments.DatasourceHost,
 		Port:     app.environments.DatasourcePort,
 		Database: app.environments.DatasourceDatabase,

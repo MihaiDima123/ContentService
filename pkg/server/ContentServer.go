@@ -1,6 +1,7 @@
 package server
 
 import (
+	"contentservice/pkg/interfaces/server"
 	"fmt"
 	"github.com/gin-gonic/gin"
 )
@@ -20,9 +21,9 @@ func (server *ContentServer) GetRouter() *gin.Engine {
 	return server.Router
 }
 
-func NewContentServer() Server {
-	server := new(ContentServer)
-	server.Router = gin.Default()
+func NewContentServer() server.Server {
+	s := new(ContentServer)
+	s.Router = gin.Default()
 
-	return server
+	return s
 }
