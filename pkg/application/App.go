@@ -8,6 +8,7 @@ import (
 	"contentservice/pkg/interfaces/restful"
 	server2 "contentservice/pkg/interfaces/server"
 	"contentservice/pkg/server"
+	"contentservice/pkg/server/log"
 )
 
 type App struct {
@@ -30,8 +31,13 @@ func (app *App) Configure() *App {
 	return app
 }
 
-func (app *App) Start() {
-	app.Server.StartServer(app.environments.AppPort)
+func (app *App) Start() error {
+	err := app.Server.StartServer(app.environments.AppPort)
+	if err != nil {
+		log.Error("Failed to start the server")
+	}
+
+	return nil
 }
 
 func (app *App) getDataSource() ds.Datasource {
