@@ -1,8 +1,8 @@
 package content
 
 import (
-	repoImpl "contentservice/pkg/application/modules/content/repository/impl"
-	"contentservice/pkg/application/modules/content/services/impl"
+	repoImpl "contentservice/pkg/application/modules/content/repository"
+	"contentservice/pkg/application/modules/content/services"
 	"contentservice/pkg/application/restful/content"
 	"contentservice/pkg/interfaces/ds"
 	"contentservice/pkg/interfaces/restful"
@@ -24,7 +24,7 @@ func (c *CntModule) init(datasource ds.Datasource) {
 		Connection: *datasource.GetConnection(),
 	})
 
-	contentService := impl.NewContentService(contentRepository)
+	contentService := services.NewContentService(contentRepository)
 
 	contentController := content.NewContentController(contentService)
 

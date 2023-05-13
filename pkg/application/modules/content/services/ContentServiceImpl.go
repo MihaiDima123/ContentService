@@ -1,8 +1,7 @@
-package impl
+package services
 
 import (
 	"contentservice/pkg/application/modules/content/repository"
-	"contentservice/pkg/application/modules/content/services"
 )
 
 type ContentServiceImpl struct {
@@ -13,7 +12,7 @@ func (c ContentServiceImpl) Test() {
 	c.contentRepository.Test()
 }
 
-func NewContentService(contentRepository repository.ContentRepository) services.ContentService {
+func NewContentService(contentRepository repository.ContentRepository) ContentService {
 	return ContentServiceImpl{
 		contentRepository: contentRepository,
 	}

@@ -1,7 +1,6 @@
-package impl
+package repository
 
 import (
-	"contentservice/pkg/application/modules/content/repository"
 	"contentservice/pkg/interfaces/restful"
 	"github.com/jackc/pgx"
 )
@@ -17,7 +16,7 @@ func (cr *ContentRepositoryImpl) Test() {
 	}
 }
 
-func NewContentRepository() repository.ContentRepository {
+func NewContentRepository() ContentRepository {
 	return new(ContentRepositoryImpl)
 }
 
