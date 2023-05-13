@@ -1,9 +1,9 @@
 package application
 
 import (
+	"contentservice/application/core"
 	"contentservice/application/initialisation"
 	"contentservice/application/modules/content"
-	"contentservice/application/modules/core"
 	"contentservice/datasource"
 	"contentservice/server"
 )

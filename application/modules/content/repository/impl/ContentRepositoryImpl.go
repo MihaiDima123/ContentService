@@ -1,8 +1,8 @@
 package impl
 
 import (
+	"contentservice/application/core"
 	"contentservice/application/modules/content/repository"
-	"contentservice/application/modules/core"
 	"github.com/jackc/pgx"
 )
 

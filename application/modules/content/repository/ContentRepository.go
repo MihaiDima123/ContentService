@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"contentservice/application/modules/core"
+	"contentservice/application/core"
 )
 
 type ContentRepository interface {
