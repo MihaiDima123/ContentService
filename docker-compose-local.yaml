@@ -18,7 +18,7 @@ services:
       - ./local_db/data:/var/lib/postgresql/data
       - ./local_db/init.sql:/docker-entrypoint-initdb.d/init.sql
     environment:
-      POSTGRES_DB: contentinterfaces
+      POSTGRES_DB: content
       POSTGRES_USER: root
       POSTGRES_PASSWORD: pa55word
     networks:
