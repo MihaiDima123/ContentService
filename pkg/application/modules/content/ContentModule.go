@@ -8,6 +8,8 @@ import (
 	"contentservice/pkg/interfaces/restful"
 )
 
+var relativePath = "content"
+
 type CntModule struct {
 	Controller content.RestfulContentController
 }
@@ -15,7 +17,7 @@ type CntModule struct {
 func (c *CntModule) Use(configuration *restful.ModuleConfiguration) {
 	c.init(configuration.Datasource)
 
-	configuration.Router.GET("/", c.Controller.GetHelloWorld)
+	configuration.Router.GET(relativePath+"/", c.Controller.GetHelloWorld)
 }
 
 func (c *CntModule) init(datasource ds.Datasource) {
