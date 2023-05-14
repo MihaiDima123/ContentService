@@ -6,13 +6,13 @@ import (
 	"contentservice/pkg/datasource"
 	"contentservice/pkg/interfaces/ds"
 	"contentservice/pkg/interfaces/restful"
-	server2 "contentservice/pkg/interfaces/server"
+	serverInt "contentservice/pkg/interfaces/server"
 	"contentservice/pkg/server"
 	"contentservice/pkg/server/log"
 )
 
 type App struct {
-	Server       server2.Server
+	Server       serverInt.Server
 	DataSource   ds.Datasource
 	environments initialisation.Environment
 }
