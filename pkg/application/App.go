@@ -36,7 +36,6 @@ func (app *App) Start() error {
 	if err != nil {
 		log.Error("Failed to start the server")
 	}
-
 	return nil
 }
 
