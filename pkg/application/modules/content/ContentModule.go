@@ -1,7 +1,7 @@
 package content
 
 import (
-	repoImpl "contentservice/pkg/application/modules/content/repository"
+	"contentservice/pkg/application/modules/content/repository"
 	"contentservice/pkg/application/modules/content/services"
 	"contentservice/pkg/application/restful/content"
 	"contentservice/pkg/interfaces/ds"
@@ -20,7 +20,7 @@ func (c *CntModule) Use(configuration *restful.ModuleConfiguration) {
 
 func (c *CntModule) init(datasource ds.Datasource) {
 	// Repo
-	contentRepository := repoImpl.NewContentRepository()
+	contentRepository := repository.NewContentRepository()
 	restful.Repository(contentRepository).Configure(restful.RepositoryConfiguration{
 		Connection: *datasource.GetConnection(),
 	})
