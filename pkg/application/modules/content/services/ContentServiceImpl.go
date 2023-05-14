@@ -1,19 +1,23 @@
 package services
 
 import (
-	"contentservice/pkg/application/modules/content/repository"
+	"contentservice/pkg/application/modules/content/interfaces"
 )
 
 type ContentServiceImpl struct {
-	contentRepository repository.ContentRepository
+	contentRepository interfaces.ContentRepository
 }
 
-func (c ContentServiceImpl) Test() {
-	c.contentRepository.Test()
+func (csi *ContentServiceImpl) Configure(repository interfaces.ContentRepository) {
+	csi.contentRepository = repository
 }
 
-func NewContentService(contentRepository repository.ContentRepository) ContentService {
-	return ContentServiceImpl{
+func New(contentRepository interfaces.ContentRepository) interfaces.ContentService {
+	return &ContentServiceImpl{
 		contentRepository: contentRepository,
 	}
+}
+
+func (csi *ContentServiceImpl) Test() {
+	csi.contentRepository.Test()
 }

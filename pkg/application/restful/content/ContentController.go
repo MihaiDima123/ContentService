@@ -1,15 +1,15 @@
 package content
 
 import (
-	"contentservice/pkg/application/modules/content/services"
+	"contentservice/pkg/application/modules/content/interfaces"
 	"github.com/gin-gonic/gin"
 )
 
 type RestfulContentController struct {
-	contentService services.ContentService
+	contentService interfaces.ContentService
 }
 
-func NewContentController(service services.ContentService) RestfulContentController {
+func NewContentController(service interfaces.ContentService) RestfulContentController {
 	return RestfulContentController{
 		contentService: service,
 	}

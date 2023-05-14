@@ -19,12 +19,14 @@ func (c *CntModule) Use(configuration *restful.ModuleConfiguration) {
 }
 
 func (c *CntModule) init(datasource ds.Datasource) {
+	// Repo
 	contentRepository := repoImpl.NewContentRepository()
-	contentRepository.Configure(restful.RepositoryConfiguration{
+	restful.Repository(contentRepository).Configure(restful.RepositoryConfiguration{
 		Connection: *datasource.GetConnection(),
 	})
 
-	contentService := services.NewContentService(contentRepository)
+	// Service
+	contentService := services.New(contentRepository)
 
 	contentController := content.NewContentController(contentService)
 

@@ -5,7 +5,6 @@ import (
 )
 
 type Repository interface {
-	// Configure More like oof, coming from java
 	Configure(configuration RepositoryConfiguration)
 }
 
