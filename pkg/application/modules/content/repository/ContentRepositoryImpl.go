@@ -3,11 +3,11 @@ package repository
 import (
 	"contentservice/pkg/application/modules/content/interfaces"
 	"contentservice/pkg/interfaces/restful"
-	"github.com/jackc/pgx"
+	"database/sql"
 )
 
 type ContentRepositoryImpl struct {
-	dbConn pgx.ConnPool
+	dbConn *sql.DB
 }
 
 func (cr *ContentRepositoryImpl) Test() {

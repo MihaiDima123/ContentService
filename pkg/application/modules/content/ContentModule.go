@@ -24,7 +24,7 @@ func (c *CntModule) init(datasource ds.Datasource) {
 	// Repo
 	contentRepository := repository.NewContentRepository()
 	restful.Repository(contentRepository).Configure(restful.RepositoryConfiguration{
-		Connection: *datasource.GetConnection(),
+		Connection: datasource.GetConnection(),
 	})
 
 	// Service

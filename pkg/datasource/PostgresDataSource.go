@@ -2,39 +2,43 @@ package datasource
 
 import (
 	"contentservice/pkg/interfaces/ds"
+	"contentservice/pkg/server/log"
+	"database/sql"
 	"fmt"
-	"github.com/jackc/pgx"
+	"gorm.io/driver/postgres"
+	"gorm.io/gorm"
+	"time"
 )
 
 type PostgresDataSource struct {
 	configuration ds.Configuration
-	Conn          *pgx.ConnPool
+	Conn          *sql.DB
 }
 
-func (ds *PostgresDataSource) GetConnection() *pgx.ConnPool {
+func (ds *PostgresDataSource) GetConnection() *sql.DB {
 	return ds.Conn
 }
 
 func (ds *PostgresDataSource) Configure() {
-	conn, err := pgx.NewConnPool(pgx.ConnPoolConfig{
-		ConnConfig: pgx.ConnConfig{
-			Host:     ds.configuration.Host,
-			Port:     ds.configuration.Port,
-			Database: ds.configuration.Database,
-			User:     ds.configuration.User,
-			Password: ds.configuration.Password,
-		},
-		MaxConnections: 10,
-		AcquireTimeout: 2000,
-	})
+	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%d",
+		ds.configuration.Host,
+		ds.configuration.User,
+		ds.configuration.Password,
+		ds.configuration.Database,
+		ds.configuration.Port)
+	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
+
+	databaseConn, _ := db.DB()
+	databaseConn.SetMaxIdleConns(10)
+	databaseConn.SetMaxOpenConns(20)
+	databaseConn.SetConnMaxLifetime(time.Hour)
 
 	if err != nil {
-		// TODO: Panic it's not good, handle your feelings (add a logger)
+		log.Error("Could not open database connection" + err.Error())
 		panic(err)
 	}
 
-	ds.Conn = conn
-	fmt.Println(ds.Conn)
+	ds.Conn = databaseConn
 }
 
 func (ds *PostgresDataSource) Initialize(configuration ds.Configuration) ds.Datasource {

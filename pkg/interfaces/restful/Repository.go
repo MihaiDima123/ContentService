@@ -1,7 +1,7 @@
 package restful
 
 import (
-	"github.com/jackc/pgx"
+	"database/sql"
 )
 
 type Repository interface {
@@ -9,5 +9,5 @@ type Repository interface {
 }
 
 type RepositoryConfiguration struct {
-	Connection pgx.ConnPool
+	Connection *sql.DB
 }

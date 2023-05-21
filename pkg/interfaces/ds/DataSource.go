@@ -1,9 +1,11 @@
 package ds
 
-import "github.com/jackc/pgx"
+import (
+	"database/sql"
+)
 
 type Datasource interface {
-	GetConnection() *pgx.ConnPool
+	GetConnection() *sql.DB
 	Initialize(configuration Configuration) Datasource
 }
 
