@@ -3,7 +3,6 @@ package datasource
 import (
 	"contentservice/pkg/interfaces/ds"
 	"contentservice/pkg/server/log"
-	"database/sql"
 	"fmt"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -12,10 +11,10 @@ import (
 
 type PostgresDataSource struct {
 	configuration ds.Configuration
-	Conn          *sql.DB
+	Conn          *gorm.DB
 }
 
-func (ds *PostgresDataSource) GetConnection() *sql.DB {
+func (ds *PostgresDataSource) GetConnection() *gorm.DB {
 	return ds.Conn
 }
 
@@ -38,7 +37,7 @@ func (ds *PostgresDataSource) Configure() {
 		panic(err)
 	}
 
-	ds.Conn = databaseConn
+	ds.Conn = db
 }
 
 func (ds *PostgresDataSource) Initialize(configuration ds.Configuration) ds.Datasource {

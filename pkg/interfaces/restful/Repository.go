@@ -1,13 +1,15 @@
 package restful
 
 import (
-	"database/sql"
+	"gorm.io/gorm"
 )
 
 type Repository interface {
 	Configure(configuration RepositoryConfiguration)
+	Create()
+	GetById(id int)
 }
 
 type RepositoryConfiguration struct {
-	Connection *sql.DB
+	Connection *gorm.DB
 }

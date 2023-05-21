@@ -1,11 +1,11 @@
 package ds
 
 import (
-	"database/sql"
+	"gorm.io/gorm"
 )
 
 type Datasource interface {
-	GetConnection() *sql.DB
+	GetConnection() *gorm.DB
 	Initialize(configuration Configuration) Datasource
 }
 

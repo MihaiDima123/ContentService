@@ -7,5 +7,4 @@ import (
 type ContentService interface {
 	restful.Service
 	Configure(repository ContentRepository)
-	Test()
 }

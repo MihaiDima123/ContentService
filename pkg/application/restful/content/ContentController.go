@@ -16,7 +16,6 @@ func NewContentController(service interfaces.ContentService) RestfulContentContr
 }
 
 func (rcc *RestfulContentController) GetHelloWorld(context *gin.Context) {
-	rcc.contentService.Test()
 	_, err := context.Writer.Write([]byte("Hi"))
 	if err != nil {
 		panic(err)

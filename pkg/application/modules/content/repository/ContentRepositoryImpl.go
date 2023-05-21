@@ -3,18 +3,18 @@ package repository
 import (
 	"contentservice/pkg/application/modules/content/interfaces"
 	"contentservice/pkg/interfaces/restful"
-	"database/sql"
+	"gorm.io/gorm"
 )
 
 type ContentRepositoryImpl struct {
-	dbConn *sql.DB
+	dbConn *gorm.DB
 }
 
-func (cr *ContentRepositoryImpl) Test() {
-	_, err := cr.dbConn.Exec("Insert into test values ('This is a test')")
-	if err != nil {
-		return
-	}
+func (cr *ContentRepositoryImpl) Create() {
+}
+
+func (cr *ContentRepositoryImpl) GetById(id int) {
+
 }
 
 func NewContentRepository() interfaces.ContentRepository {

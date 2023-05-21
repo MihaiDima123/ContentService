@@ -17,7 +17,3 @@ func New(contentRepository interfaces.ContentRepository) interfaces.ContentServi
 		contentRepository: contentRepository,
 	}
 }
-
-func (csi *ContentServiceImpl) Test() {
-	csi.contentRepository.Test()
-}
