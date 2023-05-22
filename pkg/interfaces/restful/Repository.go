@@ -1,13 +1,14 @@
 package restful
 
 import (
+	"contentservice/pkg/application/customErrors"
 	"gorm.io/gorm"
 )
 
-type Repository interface {
+type Repository[T interface{}] interface {
 	Configure(configuration RepositoryConfiguration)
-	Create()
-	GetById(id int)
+	Create(data T) (int64, customErrors.DbError)
+	GetById(id int64) (*T, customErrors.DbError)
 }
 
 type RepositoryConfiguration struct {

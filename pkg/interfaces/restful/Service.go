@@ -1,6 +1,8 @@
 package restful
 
-// Service CRUD basically, just to be used for other services
-// Advanced thing should be on implementation itself
-type Service interface {
+import "contentservice/pkg/application/customErrors"
+
+type Service[T interface{}] interface {
+	GetById(id int64) (*T, customErrors.HTTPError)
+	Create(T) (int64, customErrors.HTTPError)
 }
