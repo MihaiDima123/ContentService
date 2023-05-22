@@ -17,7 +17,7 @@ type CntModule struct {
 func (c *CntModule) Use(configuration *restful.ModuleConfiguration) {
 	c.init(configuration.Datasource)
 
-	configuration.Router.GET(relativePath+"/{id}", c.Controller.GetPostById)
+	configuration.Router.GET(relativePath+"/:id", c.Controller.GetPostById)
 	configuration.Router.POST(relativePath+"/", c.Controller.CreatePost)
 }
 

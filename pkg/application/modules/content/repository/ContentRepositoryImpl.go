@@ -34,7 +34,7 @@ func (cr *ContentRepositoryImpl) Create(post post_entities.Post) (int64, customE
 func (cr *ContentRepositoryImpl) GetById(id int64) (*post_entities.Post, customErrors.DbError) {
 	post := new(post_entities.Post)
 
-	err := cr.dbConn.Where("id = ?", id).First(post).Error
+	err := cr.dbConn.Table("post").Where("id = ?", id).First(post).Error
 
 	if errors.Is(err, gorm.ErrRecordNotFound) {
 		return nil, customErrors.ResourceNotFoundError
