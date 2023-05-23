@@ -1,7 +1,7 @@
 package restful
 
 import (
-	"contentservice/pkg/application/customErrors"
+	"contentservice/pkg/application/core/customErrors"
 	"gorm.io/gorm"
 )
 

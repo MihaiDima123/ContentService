@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"contentservice/pkg/application/customErrors"
+	"contentservice/pkg/application/core/customErrors"
 	"contentservice/pkg/application/entity/post_entities"
 	"contentservice/pkg/application/modules/content/interfaces"
 	"contentservice/pkg/interfaces/restful"

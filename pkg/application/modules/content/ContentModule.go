@@ -3,6 +3,7 @@ package content
 import (
 	"contentservice/pkg/application/modules/content/repository"
 	"contentservice/pkg/application/modules/content/services"
+	"contentservice/pkg/application/modules/content/validator"
 	"contentservice/pkg/application/restful/content"
 	"contentservice/pkg/interfaces/ds"
 	"contentservice/pkg/interfaces/restful"
@@ -28,8 +29,11 @@ func (c *CntModule) init(datasource ds.Datasource) {
 		Connection: datasource.GetConnection(),
 	})
 
+	// Post validator
+	postValidator := validator.NewPostValidator()
+
 	// Service
-	contentService := services.New(contentRepository)
+	contentService := services.New(contentRepository, postValidator)
 
 	contentController := content.NewContentController(contentService)
 
