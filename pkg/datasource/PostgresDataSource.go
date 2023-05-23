@@ -14,18 +14,27 @@ type PostgresDataSource struct {
 	Conn          *gorm.DB
 }
 
+func (ds *PostgresDataSource) Initialize(configuration ds.Configuration) ds.Datasource {
+	appDatasource := &PostgresDataSource{
+		configuration: configuration,
+	}
+
+	appDatasource.Configure()
+	return appDatasource
+}
+
+func NewPostgresDataSource() ds.Datasource {
+	return new(PostgresDataSource)
+}
+
 func (ds *PostgresDataSource) GetConnection() *gorm.DB {
 	return ds.Conn
 }
 
 func (ds *PostgresDataSource) Configure() {
-	dsn := fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%d",
-		ds.configuration.Host,
-		ds.configuration.User,
-		ds.configuration.Password,
-		ds.configuration.Database,
-		ds.configuration.Port)
-	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
+
+	db, err := gorm.Open(
+		postgres.Open(getConnectionString(ds.configuration)), new(gorm.Config))
 
 	databaseConn, _ := db.DB()
 	databaseConn.SetMaxIdleConns(10)
@@ -40,15 +49,11 @@ func (ds *PostgresDataSource) Configure() {
 	ds.Conn = db
 }
 
-func (ds *PostgresDataSource) Initialize(configuration ds.Configuration) ds.Datasource {
-	appDatasource := &PostgresDataSource{
-		configuration: configuration,
-	}
-
-	appDatasource.Configure()
-	return appDatasource
-}
-
-func NewPostgresDataSource() ds.Datasource {
-	return new(PostgresDataSource)
+func getConnectionString(configuration ds.Configuration) string {
+	return fmt.Sprintf("host=%s user=%s password=%s dbname=%s port=%d",
+		configuration.Host,
+		configuration.User,
+		configuration.Password,
+		configuration.Database,
+		configuration.Port)
 }
