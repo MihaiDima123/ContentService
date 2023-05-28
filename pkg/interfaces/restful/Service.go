@@ -4,7 +4,7 @@ import (
 	"contentservice/pkg/application/core/customErrors"
 )
 
-type Service[T interface{}] interface {
+type Service[T any] interface {
 	GetById(id int64) (*T, customErrors.HTTPError)
 	Create(T) (int64, customErrors.HTTPError)
 }

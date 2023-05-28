@@ -5,7 +5,7 @@ import (
 	"gorm.io/gorm"
 )
 
-type Repository[T interface{}] interface {
+type Repository[T any] interface {
 	Configure(configuration RepositoryConfiguration)
 	Create(data T) (int64, customErrors.DbError)
 	GetById(id int64) (*T, customErrors.DbError)
