@@ -1,22 +1,16 @@
 package customErrors
 
-type HTTPError interface {
-	error
-	GetStatus() int
-}
+import "contentservice/pkg/application/core/customErrors/interfaces"
 
-type DbError interface {
-	error
-	GetErrorType() int8
+type errorType struct {
+	Value          int8
+	DefaultMessage string
 }
 
 type CustomHttpError struct {
 	error
-	Status int
-}
-
-func (che *CustomHttpError) GetStatus() int {
-	return che.Status
+	ErrorType int8
+	Status    int
 }
 
 type CustomDbError struct {
@@ -24,6 +18,21 @@ type CustomDbError struct {
 	ErrorType int8
 }
 
+// GetErrorType Db error
 func (cde *CustomDbError) GetErrorType() int8 {
 	return cde.ErrorType
+}
+
+func (che *CustomHttpError) GetStatus() int {
+	return che.Status
+}
+
+// GetErrorType Http error
+func (che *CustomHttpError) GetErrorType() int8 {
+	return che.ErrorType
+}
+
+// Is checks if an error is of type
+func Is(httpError interfaces.CustomError, et errorType) bool {
+	return httpError.GetErrorType() == et.Value
 }

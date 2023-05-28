@@ -2,6 +2,7 @@ package repository
 
 import (
 	"contentservice/pkg/application/core/customErrors"
+	errorsInterface "contentservice/pkg/application/core/customErrors/interfaces"
 	"contentservice/pkg/application/entity/post_entities"
 	"contentservice/pkg/application/modules/content/interfaces"
 	"contentservice/pkg/interfaces/restful"
@@ -21,23 +22,23 @@ func (cr *ContentRepositoryImpl) Configure(configuration restful.RepositoryConfi
 	cr.dbConn = configuration.Connection
 }
 
-func (cr *ContentRepositoryImpl) Create(post post_entities.Post) (int64, customErrors.DbError) {
+func (cr *ContentRepositoryImpl) Create(post post_entities.Post) (int64, errorsInterface.DbError) {
 	result := cr.dbConn.Create(&post)
 
 	if result.Error != nil {
-		return post.ID, customErrors.ResourceNotCreatedError
+		return post.ID, customErrors.ResourceNotCreatedError()
 	}
 
 	return post.ID, nil
 }
 
-func (cr *ContentRepositoryImpl) GetById(id int64) (*post_entities.Post, customErrors.DbError) {
+func (cr *ContentRepositoryImpl) GetById(id int64) (*post_entities.Post, errorsInterface.DbError) {
 	post := new(post_entities.Post)
 
 	err := cr.dbConn.Table("post").Where("id = ?", id).First(post).Error
 
 	if errors.Is(err, gorm.ErrRecordNotFound) {
-		return nil, customErrors.ResourceNotFoundError
+		return nil, customErrors.ResourceNotFoundError()
 	}
 
 	return post, nil

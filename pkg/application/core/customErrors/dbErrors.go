@@ -1,18 +1,27 @@
 package customErrors
 
-import "errors"
+import "contentservice/pkg/application/core/customErrors/interfaces"
 
-const (
-	ResourceNotFound   int8 = 1
-	ResourceNotCreated int8 = 2
-)
-
-var ResourceNotFoundError = &CustomDbError{
-	error:     errors.New("resource not found"),
-	ErrorType: ResourceNotFound,
+var DbResourceNotFoundType = errorType{
+	Value:          1,
+	DefaultMessage: "resource not found",
 }
 
-var ResourceNotCreatedError = &CustomDbError{
-	error:     errors.New("resource not created"),
-	ErrorType: ResourceNotCreated,
+var DbResourceNotCreatedType = errorType{
+	Value:          2,
+	DefaultMessage: "resource not created",
+}
+
+var ResourceNotFoundError = func(params ...string) interfaces.DbError {
+	return &CustomDbError{
+		error:     getErrorFromString(DbResourceNotFoundType.DefaultMessage, params...),
+		ErrorType: DbResourceNotFoundType.Value,
+	}
+}
+
+var ResourceNotCreatedError = func(params ...string) interfaces.DbError {
+	return &CustomDbError{
+		error:     getErrorFromString(DbResourceNotCreatedType.DefaultMessage, params...),
+		ErrorType: DbResourceNotCreatedType.Value,
+	}
 }

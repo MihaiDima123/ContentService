@@ -1,7 +1,7 @@
 package content
 
 import (
-	"contentservice/pkg/application/core/customErrors"
+	errorsInterface "contentservice/pkg/application/core/customErrors/interfaces"
 	"contentservice/pkg/application/entity/post_entities"
 	"contentservice/pkg/application/modules/content/interfaces"
 	"contentservice/pkg/server/log"
@@ -32,7 +32,7 @@ func (rcc *RestfulContentController) GetPostById(context *gin.Context) {
 
 	post, err := rcc.contentService.GetById(idParam)
 
-	if httpErr, ok := err.(customErrors.HTTPError); ok {
+	if httpErr, ok := err.(errorsInterface.HTTPError); ok {
 		log.Warn(fmt.Sprintf("Post not found: %d", idParam))
 		context.Status(httpErr.GetStatus())
 		return
@@ -50,6 +50,7 @@ func (rcc *RestfulContentController) GetPostById(context *gin.Context) {
 func (rcc *RestfulContentController) CreatePost(context *gin.Context) {
 	post := post_entities.Post{}
 	err := context.BindJSON(&post)
+
 	if err != nil {
 		log.Warn("error when parsing request body" + err.Error())
 		context.Status(http.StatusBadRequest)
@@ -58,7 +59,7 @@ func (rcc *RestfulContentController) CreatePost(context *gin.Context) {
 
 	id, err := rcc.contentService.Create(post)
 
-	if httpErr, ok := err.(customErrors.HTTPError); ok {
+	if httpErr, ok := err.(errorsInterface.HTTPError); ok {
 		log.Warn("Could not create post: " + httpErr.Error())
 		context.Status(httpErr.GetStatus())
 		return
