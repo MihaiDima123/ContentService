@@ -9,7 +9,7 @@ import (
 	"contentservice/pkg/interfaces/restful"
 )
 
-var relativePath = "content"
+const relativePath = "content"
 
 type CntModule struct {
 	Controller content.RestfulContentController
