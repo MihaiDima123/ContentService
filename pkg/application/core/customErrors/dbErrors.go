@@ -2,7 +2,7 @@ package customErrors
 
 import (
 	"contentservice/pkg/application/core/customErrors/utils"
-	"contentservice/pkg/interfaces/errors"
+	"contentservice/pkg/interfaces/customerrors"
 )
 
 var DbResourceNotFoundType = errorType{
@@ -15,14 +15,18 @@ var DbResourceNotCreatedType = errorType{
 	DefaultMessage: "resource not created",
 }
 
-var ResourceNotFoundError = func(params ...string) errors.DbError {
+// DbNotFoundError Constants
+var DbNotFoundError = GetResourceNotFoundError()
+var DbNotCreatedError = GetResourceNotCreatedError()
+
+var GetResourceNotFoundError = func(params ...string) customerrors.DbError {
 	return &CustomDbError{
 		error:     utils.GetErrorFromString(DbResourceNotFoundType.DefaultMessage, params...),
 		ErrorType: DbResourceNotFoundType.Value,
 	}
 }
 
-var ResourceNotCreatedError = func(params ...string) errors.DbError {
+var GetResourceNotCreatedError = func(params ...string) customerrors.DbError {
 	return &CustomDbError{
 		error:     utils.GetErrorFromString(DbResourceNotCreatedType.DefaultMessage, params...),
 		ErrorType: DbResourceNotCreatedType.Value,

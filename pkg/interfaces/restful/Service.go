@@ -1,10 +1,10 @@
 package restful
 
 import (
-	"contentservice/pkg/interfaces/errors"
+	"contentservice/pkg/interfaces/customerrors"
 )
 
 type Service[T any] interface {
-	GetById(id int64) (*T, errors.HTTPError)
-	Create(T) (int64, errors.HTTPError)
+	GetById(id int64) (*T, customerrors.HTTPError)
+	Create(T) (int64, customerrors.HTTPError)
 }

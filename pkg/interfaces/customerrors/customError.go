@@ -1,4 +1,4 @@
-package errors
+package customerrors
 
 type CustomError interface {
 	error
