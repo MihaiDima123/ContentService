@@ -26,7 +26,7 @@ func (cr *ContentRepositoryImpl) Create(post post_entities.Post) (int64, errorsI
 	result := cr.dbConn.Create(&post)
 
 	if result.Error != nil {
-		return post.ID, customErrors.DbNotFoundError
+		return post.ID, customErrors.DbNotCreatedError
 	}
 
 	return post.ID, nil
