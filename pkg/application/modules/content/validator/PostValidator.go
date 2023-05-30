@@ -9,6 +9,10 @@ const (
 	EmailTooShortError = "Email too short"
 )
 
+const (
+	MinEmailLength = 3
+)
+
 type PostValidator struct {
 	validator.Validator[post_entities.Post]
 }
@@ -16,7 +20,7 @@ type PostValidator struct {
 func (pv *PostValidator) Validate(post post_entities.Post) []validator.ValidationError {
 	var errors []validator.ValidationError
 
-	if len(post.UserEmail) <= 3 {
+	if valueLessThan(post.UserEmail, MinEmailLength) {
 		errors = append(errors, validator.ValidationError{Message: EmailTooShortError})
 	}
 
