@@ -14,6 +14,10 @@ type ContentRepositoryImpl struct {
 	dbConn *gorm.DB
 }
 
+const (
+	PostTableName = "post"
+)
+
 func NewContentRepository() interfaces.ContentRepository {
 	return new(ContentRepositoryImpl)
 }
@@ -23,7 +27,7 @@ func (cr *ContentRepositoryImpl) Configure(configuration restful.RepositoryConfi
 }
 
 func (cr *ContentRepositoryImpl) Create(post post_entities.Post) (int64, errorsInterface.DbError) {
-	result := cr.dbConn.Create(&post)
+	result := cr.dbConn.Table(PostTableName).Create(&post)
 
 	if result.Error != nil {
 		return post.ID, customErrors.DbNotCreatedError
@@ -35,7 +39,7 @@ func (cr *ContentRepositoryImpl) Create(post post_entities.Post) (int64, errorsI
 func (cr *ContentRepositoryImpl) GetById(id int64) (*post_entities.Post, errorsInterface.DbError) {
 	post := new(post_entities.Post)
 
-	err := cr.dbConn.Table("post").Where("id = ?", id).First(post).Error
+	err := cr.dbConn.Table(PostTableName).Where("id = ?", id).First(post).Error
 
 	if errors.Is(err, gorm.ErrRecordNotFound) {
 		return nil, customErrors.DbNotFoundError
