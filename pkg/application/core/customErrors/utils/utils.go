@@ -1,4 +1,4 @@
-package customErrors
+package utils
 
 import (
 	"errors"
@@ -7,7 +7,7 @@ import (
 
 const ErrorMessageSeparator = "|"
 
-func getErrorFromString(defaultMessage string, params ...string) error {
+func GetErrorFromString(defaultMessage string, params ...string) error {
 	if len(params) == 0 {
 		return errors.New(defaultMessage)
 	}
