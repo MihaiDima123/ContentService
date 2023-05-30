@@ -1,6 +1,8 @@
 package customErrors
 
-import "contentservice/pkg/application/core/customErrors/interfaces"
+import (
+	"contentservice/pkg/interfaces/errors"
+)
 
 type errorType struct {
 	Value          int8
@@ -33,6 +35,6 @@ func (che *CustomHttpError) GetErrorType() int8 {
 }
 
 // Is checks if an error is of type
-func Is(httpError interfaces.CustomError, et errorType) bool {
+func Is(httpError errors.CustomError, et errorType) bool {
 	return httpError.GetErrorType() == et.Value
 }

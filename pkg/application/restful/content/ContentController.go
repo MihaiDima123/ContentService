@@ -1,9 +1,9 @@
 package content
 
 import (
-	errorsInterface "contentservice/pkg/application/core/customErrors/interfaces"
 	"contentservice/pkg/application/entity/post_entities"
 	"contentservice/pkg/application/modules/content/interfaces"
+	errorsInterface "contentservice/pkg/interfaces/errors"
 	"contentservice/pkg/server/log"
 	"fmt"
 	"github.com/gin-gonic/gin"

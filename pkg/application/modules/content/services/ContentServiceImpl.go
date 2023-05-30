@@ -2,10 +2,10 @@ package services
 
 import (
 	"contentservice/pkg/application/core/customErrors"
-	errorInterfaces "contentservice/pkg/application/core/customErrors/interfaces"
 	"contentservice/pkg/application/entity/post_entities"
 	"contentservice/pkg/application/modules/content/interfaces"
 	"contentservice/pkg/application/modules/content/validator"
+	errorInterfaces "contentservice/pkg/interfaces/errors"
 )
 
 type ContentServiceImpl struct {

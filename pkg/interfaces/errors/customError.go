@@ -1,4 +1,4 @@
-package interfaces
+package errors
 
 type CustomError interface {
 	error

@@ -1,8 +1,8 @@
 package validator
 
 import (
-	"contentservice/pkg/application/core/validator"
 	"contentservice/pkg/application/entity/post_entities"
+	"contentservice/pkg/interfaces/validator"
 )
 
 const (

@@ -1,8 +1,8 @@
 package customErrors
 
 import (
-	"contentservice/pkg/application/core/customErrors/interfaces"
 	"contentservice/pkg/application/core/customErrors/utils"
+	"contentservice/pkg/interfaces/errors"
 	"net/http"
 )
 
@@ -21,7 +21,7 @@ var BadRequestErrorType = errorType{
 	DefaultMessage: "internal server error",
 }
 
-var NotFoundError = func(params ...string) interfaces.HTTPError {
+var NotFoundError = func(params ...string) errors.HTTPError {
 	return &CustomHttpError{
 		error:     utils.GetErrorFromString(NotFoundErrorType.DefaultMessage, params...),
 		ErrorType: NotFoundErrorType.Value,
@@ -29,7 +29,7 @@ var NotFoundError = func(params ...string) interfaces.HTTPError {
 	}
 }
 
-var InternalServerError = func(params ...string) interfaces.HTTPError {
+var InternalServerError = func(params ...string) errors.HTTPError {
 	return &CustomHttpError{
 		error:     utils.GetErrorFromString(InternalServerErrorType.DefaultMessage, params...),
 		ErrorType: InternalServerErrorType.Value,
@@ -37,7 +37,7 @@ var InternalServerError = func(params ...string) interfaces.HTTPError {
 	}
 }
 
-var BadRequestError = func(params ...string) interfaces.HTTPError {
+var BadRequestError = func(params ...string) errors.HTTPError {
 	return &CustomHttpError{
 		error:     utils.GetErrorFromString(BadRequestErrorType.DefaultMessage, params...),
 		ErrorType: BadRequestErrorType.Value,
