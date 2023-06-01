@@ -84,8 +84,10 @@ create table post(
 create table post_content(
      id SERIAL primary key,
      content text,
+     post_id int not null,
      post_template_slot_id int not null,
      tenant_id int,
+     constraint fk_user_content_post_id foreign key (post_id) references post(id),
      constraint fk_user_content_tenant foreign key (tenant_id) references tenant(id),
      constraint fk_user_content_slot foreign key (post_template_slot_id) references post_template_slot(id)
 );
