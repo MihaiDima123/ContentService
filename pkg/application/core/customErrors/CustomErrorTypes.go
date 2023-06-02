@@ -50,6 +50,6 @@ func (cve *CustomValidationError) GetSource() string {
 }
 
 // Is checks if an error is of type
-func Is(httpError customerrors.CustomError, et errorType) bool {
+func Is(httpError customerrors.CustomError, et *errorType) bool {
 	return httpError.GetErrorType() == et.Value
 }
