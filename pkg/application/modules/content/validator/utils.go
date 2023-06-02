@@ -1,5 +1,5 @@
-package validator
+package validatorImpl
 
-func valueLessThan(value string, toCompare int) bool {
+func ValueLessThan(value string, toCompare int) bool {
 	return len(value) <= toCompare
 }

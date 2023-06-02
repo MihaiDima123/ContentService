@@ -5,13 +5,13 @@ import (
 	"contentservice/pkg/application/core/customErrors/httpErrors"
 	"contentservice/pkg/application/entity/post_entities"
 	"contentservice/pkg/application/modules/content/interfaces"
-	"contentservice/pkg/application/modules/content/validator"
 	errorInterfaces "contentservice/pkg/interfaces/customerrors"
+	"contentservice/pkg/interfaces/validator"
 )
 
 type ContentServiceImpl struct {
 	contentRepository interfaces.ContentRepository
-	postValidator     *validator.PostValidator
+	postValidator     validator.Validator[post_entities.Post]
 }
 
 func (csi *ContentServiceImpl) Configure(repository interfaces.ContentRepository) {
@@ -19,7 +19,7 @@ func (csi *ContentServiceImpl) Configure(repository interfaces.ContentRepository
 }
 
 func New(contentRepository interfaces.ContentRepository,
-	validator *validator.PostValidator) interfaces.ContentService {
+	validator validator.Validator[post_entities.Post]) interfaces.ContentService {
 	return &ContentServiceImpl{
 		contentRepository: contentRepository,
 		postValidator:     validator,

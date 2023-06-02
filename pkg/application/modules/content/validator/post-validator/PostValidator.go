@@ -1,9 +1,10 @@
-package validator
+package postValidator
 
 import (
 	"contentservice/pkg/application/core/customErrors/validation-errors"
+	"contentservice/pkg/application/core/validator/instance"
 	"contentservice/pkg/application/entity/post_entities"
-	"contentservice/pkg/application/modules/content/validator/instance"
+	"contentservice/pkg/application/modules/content/validator"
 	"contentservice/pkg/interfaces/customerrors"
 	"contentservice/pkg/interfaces/validator"
 )
@@ -20,11 +21,10 @@ type PostValidator struct {
 	validator.Validator[post_entities.Post]
 }
 
-// Validate TODO: Use the interface
 func (pv *PostValidator) Validate(post post_entities.Post) []customerrors.ValidationError {
 	var errors []customerrors.ValidationError
 
-	if valueLessThan(post.UserEmail, MinEmailLength) {
+	if validatorImpl.ValueLessThan(post.UserEmail, MinEmailLength) {
 		errors = append(errors,
 			validationErrors.GetTooShortError(EmailTooShortError))
 	}
@@ -32,6 +32,6 @@ func (pv *PostValidator) Validate(post post_entities.Post) []customerrors.Valida
 	return errors
 }
 
-func NewPostValidator() *PostValidator {
+func New() validator.Validator[post_entities.Post] {
 	return new(PostValidator)
 }
