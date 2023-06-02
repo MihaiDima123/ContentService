@@ -1,23 +1,24 @@
-package customErrors
+package httpErrors
 
 import (
+	"contentservice/pkg/application/core/customErrors"
 	"contentservice/pkg/application/core/customErrors/utils"
 	"contentservice/pkg/interfaces/customerrors"
 	"net/http"
 )
 
 // NotFoundErrorType Error types
-var NotFoundErrorType = &errorType{
+var NotFoundErrorType = &customErrors.ErrorType{
 	Value:          1,
 	DefaultMessage: "not found",
 }
 
-var InternalServerErrorType = &errorType{
+var InternalServerErrorType = &customErrors.ErrorType{
 	Value:          2,
 	DefaultMessage: "not created",
 }
 
-var BadRequestErrorType = &errorType{
+var BadRequestErrorType = &customErrors.ErrorType{
 	Value:          3,
 	DefaultMessage: "internal server error",
 }

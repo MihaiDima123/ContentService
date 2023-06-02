@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"contentservice/pkg/application/core/customErrors"
+	"contentservice/pkg/application/core/customErrors/db-errors"
 	"contentservice/pkg/application/entity/post_entities"
 	"contentservice/pkg/application/modules/content/interfaces"
 	errorsInterface "contentservice/pkg/interfaces/customerrors"
@@ -30,7 +30,7 @@ func (cr *ContentRepositoryImpl) Create(post post_entities.Post) (int64, errorsI
 	result := cr.dbConn.Table(PostTableName).Create(&post)
 
 	if result.Error != nil {
-		return post.ID, customErrors.DbNotCreatedError
+		return post.ID, db_errors.DbNotCreatedError
 	}
 
 	return post.ID, nil
@@ -42,7 +42,7 @@ func (cr *ContentRepositoryImpl) GetById(id int64) (*post_entities.Post, errorsI
 	err := cr.dbConn.Table(PostTableName).Where("id = ?", id).First(post).Error
 
 	if errors.Is(err, gorm.ErrRecordNotFound) {
-		return nil, customErrors.DbNotFoundError
+		return nil, db_errors.DbNotFoundError
 	}
 
 	return post, nil

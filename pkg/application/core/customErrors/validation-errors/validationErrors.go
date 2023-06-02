@@ -1,11 +1,12 @@
-package customErrors
+package validationErrors
 
 import (
+	"contentservice/pkg/application/core/customErrors"
 	"contentservice/pkg/application/core/customErrors/utils"
 	"contentservice/pkg/interfaces/customerrors"
 )
 
-var TooShortErrorType = errorType{
+var TooShortErrorType = customErrors.ErrorType{
 	Value:          1,
 	DefaultMessage: "Too short",
 }

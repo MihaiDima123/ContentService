@@ -1,16 +1,17 @@
-package customErrors
+package dbErrors
 
 import (
+	"contentservice/pkg/application/core/customErrors"
 	"contentservice/pkg/application/core/customErrors/utils"
 	"contentservice/pkg/interfaces/customerrors"
 )
 
-var DbResourceNotFoundType = &errorType{
+var DbResourceNotFoundType = &customErrors.ErrorType{
 	Value:          1,
 	DefaultMessage: "resource not found",
 }
 
-var DbResourceNotCreatedType = &errorType{
+var DbResourceNotCreatedType = &customErrors.ErrorType{
 	Value:          2,
 	DefaultMessage: "resource not created",
 }

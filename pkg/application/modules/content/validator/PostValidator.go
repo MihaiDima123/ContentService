@@ -1,7 +1,7 @@
 package validator
 
 import (
-	"contentservice/pkg/application/core/customErrors"
+	"contentservice/pkg/application/core/customErrors/validation-errors"
 	"contentservice/pkg/application/entity/post_entities"
 	"contentservice/pkg/interfaces/customerrors"
 	"contentservice/pkg/interfaces/validator"
@@ -23,7 +23,7 @@ func (pv *PostValidator) Validate(post post_entities.Post) []customerrors.Valida
 	var errors []customerrors.ValidationError
 
 	if valueLessThan(post.UserEmail, MinEmailLength) {
-		errors = append(errors, customErrors.GetTooShortError("Email"))
+		errors = append(errors, validation_errors.GetTooShortError("Email"))
 	}
 
 	return errors
