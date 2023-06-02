@@ -1,7 +1,7 @@
 package validator
 
 // Validator TODO: Make a chain-like validator
-type Validator[T interface{}] interface {
+type Validator[T any] interface {
 	Validate(T) []ValidationError
 }
 
