@@ -3,7 +3,7 @@ package validator
 import (
 	"contentservice/pkg/application/core/customErrors/validation-errors"
 	"contentservice/pkg/application/entity/post_entities"
-	validationInstance "contentservice/pkg/application/modules/content/validator/instance"
+	"contentservice/pkg/application/modules/content/validator/instance"
 	"contentservice/pkg/interfaces/customerrors"
 	"contentservice/pkg/interfaces/validator"
 )
