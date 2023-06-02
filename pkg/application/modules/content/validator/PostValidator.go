@@ -23,7 +23,7 @@ func (pv *PostValidator) Validate(post post_entities.Post) []customerrors.Valida
 	var errors []customerrors.ValidationError
 
 	if valueLessThan(post.UserEmail, MinEmailLength) {
-		errors = append(errors, validation_errors.GetTooShortError("Email"))
+		errors = append(errors, validationErrors.GetTooShortError("Email"))
 	}
 
 	return errors
