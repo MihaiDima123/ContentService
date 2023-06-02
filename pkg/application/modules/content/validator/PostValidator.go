@@ -20,6 +20,7 @@ type PostValidator struct {
 	validator.Validator[post_entities.Post]
 }
 
+// Validate TODO: Use the interface
 func (pv *PostValidator) Validate(post post_entities.Post) []customerrors.ValidationError {
 	var errors []customerrors.ValidationError
 
