@@ -1,10 +1,8 @@
 package validator
 
+import "contentservice/pkg/interfaces/customerrors"
+
 // Validator TODO: Make a chain-like validator
 type Validator[T any] interface {
-	Validate(T) []ValidationError
-}
-
-type ValidationError struct {
-	Message string
+	Validate(T) []customerrors.ValidationError
 }

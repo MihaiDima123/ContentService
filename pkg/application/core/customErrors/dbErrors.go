@@ -5,12 +5,12 @@ import (
 	"contentservice/pkg/interfaces/customerrors"
 )
 
-var DbResourceNotFoundType = errorType{
+var DbResourceNotFoundType = &errorType{
 	Value:          1,
 	DefaultMessage: "resource not found",
 }
 
-var DbResourceNotCreatedType = errorType{
+var DbResourceNotCreatedType = &errorType{
 	Value:          2,
 	DefaultMessage: "resource not created",
 }

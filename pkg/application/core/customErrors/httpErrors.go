@@ -7,17 +7,17 @@ import (
 )
 
 // NotFoundErrorType Error types
-var NotFoundErrorType = errorType{
+var NotFoundErrorType = &errorType{
 	Value:          1,
 	DefaultMessage: "not found",
 }
 
-var InternalServerErrorType = errorType{
+var InternalServerErrorType = &errorType{
 	Value:          2,
 	DefaultMessage: "not created",
 }
 
-var BadRequestErrorType = errorType{
+var BadRequestErrorType = &errorType{
 	Value:          3,
 	DefaultMessage: "internal server error",
 }
