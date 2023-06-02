@@ -4,6 +4,7 @@ import (
 	"contentservice/pkg/application/core/customErrors"
 	"contentservice/pkg/application/core/customErrors/utils"
 	"contentservice/pkg/interfaces/customerrors"
+	"contentservice/pkg/interfaces/validator"
 )
 
 var TooShortErrorType = customErrors.ErrorType{
@@ -11,10 +12,10 @@ var TooShortErrorType = customErrors.ErrorType{
 	DefaultMessage: "Too short",
 }
 
-func GetTooShortError(source string, reasons ...string) customerrors.ValidationError {
+func GetTooShortError(instance validator.ValidationInstance) customerrors.ValidationError {
 	return &CustomValidationError{
-		error:     utils.GetErrorFromString(TooShortErrorType.DefaultMessage, reasons...),
-		Source:    source,
+		error:     utils.GetErrorFromString(TooShortErrorType.DefaultMessage, instance.Message()),
+		Source:    instance.Instance(),
 		ErrorType: TooShortErrorType.Value,
 	}
 }
