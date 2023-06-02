@@ -30,7 +30,7 @@ func (cr *ContentRepositoryImpl) Create(post post_entities.Post) (int64, errorsI
 	result := cr.dbConn.Table(PostTableName).Create(&post)
 
 	if result.Error != nil {
-		return post.ID, db_errors.DbNotCreatedError
+		return post.ID, dbErrors.DbNotCreatedError
 	}
 
 	return post.ID, nil
@@ -42,7 +42,7 @@ func (cr *ContentRepositoryImpl) GetById(id int64) (*post_entities.Post, errorsI
 	err := cr.dbConn.Table(PostTableName).Where("id = ?", id).First(post).Error
 
 	if errors.Is(err, gorm.ErrRecordNotFound) {
-		return nil, db_errors.DbNotFoundError
+		return nil, dbErrors.DbNotFoundError
 	}
 
 	return post, nil
