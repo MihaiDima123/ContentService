@@ -18,6 +18,7 @@ type App struct {
 	environments initialisation.Environment
 }
 
+// TODO: Apply a strategy there
 func (app *App) Configure() *App {
 	app.environments = initialisation.InitEnv() // Init the environments
 	app.DataSource = app.getDataSource()        // Then the data source
@@ -43,6 +44,7 @@ func (app *App) Start() error {
 	err := app.Server.StartServer(app.environments.AppPort)
 	if err != nil {
 		log.Error("Failed to start the server")
+		return err
 	}
 	return nil
 }
