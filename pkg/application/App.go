@@ -36,6 +36,7 @@ func (app *App) Start() error {
 	err := app.Server.StartServer(app.environments.AppPort)
 	if err != nil {
 		log.Error("Failed to start the server")
+		return err
 	}
 	return nil
 }
