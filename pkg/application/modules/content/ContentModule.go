@@ -30,10 +30,10 @@ func (c *CntModule) init(datasource ds.Datasource) {
 	})
 
 	// Post validator
-	postValidator := postValidator.New()
+	pv := postValidator.New()
 
 	// Service
-	contentService := services.New(contentRepository, postValidator)
+	contentService := services.New(contentRepository, pv)
 
 	contentController := content.NewContentController(contentService)
 

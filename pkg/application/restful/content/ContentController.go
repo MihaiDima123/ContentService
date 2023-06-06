@@ -1,6 +1,7 @@
 package content
 
 import (
+	parseParam "contentservice/pkg/application/core/parse-param"
 	"contentservice/pkg/application/entity/post_entities"
 	"contentservice/pkg/application/modules/content/interfaces"
 	errorsInterface "contentservice/pkg/interfaces/customerrors"
@@ -8,7 +9,6 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"net/http"
-	"strconv"
 )
 
 type RestfulContentController struct {
@@ -22,7 +22,7 @@ func NewContentController(service interfaces.ContentService) RestfulContentContr
 }
 
 func (rcc *RestfulContentController) GetPostById(context *gin.Context) {
-	idParam, err := strconv.ParseInt(context.Param("id"), 10, 32)
+	idParam, err := parseParam.GetIntegerParam(parseParam.IdParamName, context)
 
 	if err != nil {
 		log.Warn("Bad request, could not parse id param")

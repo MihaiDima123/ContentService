@@ -41,7 +41,7 @@ func (cr *ContentRepositoryImpl) GetById(id int64) (*post_entities.Post, errorsI
 
 	err := cr.dbConn.Table(PostTableName).Where("id = ?", id).First(post).Error
 
-	if errors.Is(err, gorm.ErrRecordNotFound) {
+	if errors.Is(err, gorm.ErrRecordNotFound) || err != nil {
 		return nil, dbErrors.DbNotFoundError
 	}
 

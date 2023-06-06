@@ -2,6 +2,7 @@ package application
 
 import (
 	"contentservice/pkg/application/initialisation"
+	categoryModule "contentservice/pkg/application/modules/category"
 	"contentservice/pkg/application/modules/content"
 	"contentservice/pkg/datasource"
 	"contentservice/pkg/interfaces/ds"
@@ -23,9 +24,16 @@ func (app *App) Configure() *App {
 
 	app.Server = server.NewServer()
 
+	// Content
 	content.NewContentModule().Use(&restful.ModuleConfiguration{
 		Datasource: app.DataSource,
-		Router:     *app.Server.GetRouter(),
+		Router:     app.Server.GetRouter(),
+	})
+
+	// Category
+	categoryModule.New().Use(&restful.ModuleConfiguration{
+		Datasource: app.DataSource,
+		Router:     app.Server.GetRouter(),
 	})
 
 	return app

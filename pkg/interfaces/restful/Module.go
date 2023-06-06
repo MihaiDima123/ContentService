@@ -11,5 +11,5 @@ type Module interface {
 
 type ModuleConfiguration struct {
 	Datasource ds.Datasource
-	Router     gin.Engine
+	Router     *gin.Engine
 }
