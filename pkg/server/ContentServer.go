@@ -24,6 +24,7 @@ func (server *ContentServer) StartServer(port uint16) error {
 	return nil
 }
 
+// TODO: Use the "Server" interface
 func (server *ContentServer) GetRouter() *gin.Engine {
 	return server.Router
 }
