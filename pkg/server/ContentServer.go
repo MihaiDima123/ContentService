@@ -26,6 +26,7 @@ func (server *ContentServer) GetRouter() *gin.Engine {
 	return server.Router
 }
 
+// TODO: sever interface there?
 func NewServer() *ContentServer {
 	return GetContentServer()
 }
