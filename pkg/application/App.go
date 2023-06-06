@@ -17,6 +17,7 @@ type App struct {
 	environments initialisation.Environment
 }
 
+// TODO: Apply a strategy there
 func (app *App) Configure() *App {
 	app.environments = initialisation.InitEnv() // Init the environments
 	app.DataSource = app.getDataSource()        // Then the data source
