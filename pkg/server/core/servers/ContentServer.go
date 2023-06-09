@@ -1,7 +1,7 @@
 package servers
 
 import (
-	"contentservice/pkg/serverInit/log"
+	"contentservice/pkg/server/log"
 	"fmt"
 	"github.com/gin-gonic/gin"
 )

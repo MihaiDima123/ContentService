@@ -5,7 +5,7 @@ import (
 	"contentservice/pkg/application/core/customErrors/httpErrors"
 	"contentservice/pkg/application/core/parse-param"
 	"contentservice/pkg/application/modules/category/interfaces"
-	"contentservice/pkg/serverInit/log"
+	"contentservice/pkg/server/log"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"net/http"

@@ -1,8 +1,8 @@
-package serverInit
+package server
 
 import (
 	"contentservice/pkg/interfaces/server"
-	"contentservice/pkg/serverInit/core/factory"
+	"contentservice/pkg/server/core/factory"
 )
 
 func New() server.Server {

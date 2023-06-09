@@ -5,7 +5,7 @@ import (
 	"contentservice/pkg/application/entity/post_entities"
 	"contentservice/pkg/application/modules/content/interfaces"
 	errorsInterface "contentservice/pkg/interfaces/customerrors"
-	"contentservice/pkg/serverInit/log"
+	"contentservice/pkg/server/log"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"net/http"

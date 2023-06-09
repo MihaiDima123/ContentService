@@ -2,7 +2,7 @@ package serverFactory
 
 import (
 	serverInterface "contentservice/pkg/interfaces/server"
-	"contentservice/pkg/serverInit/core/servers"
+	"contentservice/pkg/server/core/servers"
 	"github.com/gin-gonic/gin"
 )
 
