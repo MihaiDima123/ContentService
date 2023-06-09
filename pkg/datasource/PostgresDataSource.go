@@ -2,7 +2,7 @@ package datasource
 
 import (
 	"contentservice/pkg/interfaces/ds"
-	"contentservice/pkg/server/log"
+	"contentservice/pkg/serverInit/log"
 	"fmt"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"

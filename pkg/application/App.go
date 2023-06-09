@@ -8,8 +8,8 @@ import (
 	"contentservice/pkg/interfaces/ds"
 	"contentservice/pkg/interfaces/restful"
 	serverInt "contentservice/pkg/interfaces/server"
-	"contentservice/pkg/server"
-	"contentservice/pkg/server/log"
+	"contentservice/pkg/serverInit"
+	"contentservice/pkg/serverInit/log"
 )
 
 type App struct {
@@ -23,7 +23,7 @@ func (app *App) Configure() *App {
 	app.environments = initialisation.InitEnv() // Init the environments
 	app.DataSource = app.getDataSource()        // Then the data source
 
-	app.Server = server.NewServer()
+	app.Server = serverInit.New()
 
 	// Content
 	content.NewContentModule().Use(&restful.ModuleConfiguration{

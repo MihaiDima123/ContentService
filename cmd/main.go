@@ -2,7 +2,7 @@ package main
 
 import (
 	"contentservice/pkg/application"
-	"contentservice/pkg/server/log"
+	"contentservice/pkg/serverInit/log"
 )
 
 func main() {

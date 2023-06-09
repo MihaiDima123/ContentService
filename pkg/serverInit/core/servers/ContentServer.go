@@ -1,9 +1,7 @@
-package server
+package servers
 
 import (
-	"contentservice/pkg/interfaces/server"
-	"contentservice/pkg/server/core/factory"
-	"contentservice/pkg/server/log"
+	"contentservice/pkg/serverInit/log"
 	"fmt"
 	"github.com/gin-gonic/gin"
 )
@@ -24,11 +22,6 @@ func (server *ContentServer) StartServer(port uint16) error {
 	return nil
 }
 
-// TODO: Use the "Server" interface
 func (server *ContentServer) GetRouter() *gin.Engine {
 	return server.Router
-}
-
-func NewServer() server.Server {
-	return serverFactory.GetContentServer()
 }
