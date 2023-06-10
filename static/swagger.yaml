@@ -1,0 +1,26 @@
+openapi: 3.0.3
+info:
+  version: 1.0.1
+  title: Content
+tags:
+  - name: Posts
+    description: Posts related endpoints
+  - name: Template
+    description: Template related endpoints
+paths:
+  /content:
+    post:
+      tags:
+        - Posts
+      description: Route for creating a post
+      responses:
+        201:
+          description: Post created
+  /template:
+    post:
+      tags:
+        - Template
+      description: Route for creating a template
+      responses:
+        201:
+          description: Template was created
