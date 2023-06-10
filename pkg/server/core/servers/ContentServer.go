@@ -25,3 +25,7 @@ func (server *ContentServer) StartServer(port uint16) error {
 func (server *ContentServer) GetRouter() *gin.Engine {
 	return server.Router
 }
+
+func (server *ContentServer) AddMiddleware(middleware gin.HandlerFunc) {
+	server.Router.Use(middleware)
+}

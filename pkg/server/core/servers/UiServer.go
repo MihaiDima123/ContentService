@@ -27,3 +27,7 @@ func (server *UiServer) StartServer(port uint16) error {
 func (server *UiServer) GetRouter() *gin.Engine {
 	return server.Router
 }
+
+func (server *UiServer) AddMiddleware(middleware gin.HandlerFunc) {
+	server.Router.Use(middleware)
+}

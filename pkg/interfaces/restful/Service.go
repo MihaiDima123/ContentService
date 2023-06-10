@@ -6,5 +6,5 @@ import (
 
 type Service[T any] interface {
 	GetById(id int64) (*T, customerrors.HTTPError)
-	Create(T) (int64, customerrors.HTTPError)
+	Create(*T) (int64, customerrors.HTTPError)
 }

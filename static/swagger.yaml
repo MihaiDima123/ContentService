@@ -1,26 +1,43 @@
 openapi: 3.0.3
 info:
-  version: 1.0.1
+  version: 1.0.0
   title: Content
+servers:
+  - url: http://localhost:8080
 tags:
+  - name: Categories
+    description: Category related endpoints
   - name: Posts
     description: Posts related endpoints
   - name: Template
     description: Template related endpoints
+components:
+  schemas:
+    "category":
+      properties:
+        id:
+          type: integer
+          required: false
+        name:
+          type: string
+          required: true
+        tenant_id:
+          type: integer
+          required: true
+
 paths:
-  /content:
+  /category:
     post:
       tags:
-        - Posts
-      description: Route for creating a post
+        - Categories
+      description: Route for creating a category
+      requestBody:
+        description: Category body
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/category"
       responses:
         201:
-          description: Post created
-  /template:
-    post:
-      tags:
-        - Template
-      description: Route for creating a template
-      responses:
-        201:
-          description: Template was created
+          description: Category created

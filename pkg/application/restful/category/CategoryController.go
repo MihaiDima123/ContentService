@@ -4,6 +4,8 @@ import (
 	"contentservice/pkg/application/core/customErrors"
 	"contentservice/pkg/application/core/customErrors/httpErrors"
 	"contentservice/pkg/application/core/parse-param"
+	problemDetailImpl "contentservice/pkg/application/core/problemDetail"
+	"contentservice/pkg/application/entity/post_entities"
 	"contentservice/pkg/application/modules/category/interfaces"
 	"contentservice/pkg/server/log"
 	"fmt"
@@ -31,12 +33,31 @@ func (cc *CategoryController) GetById(ctx *gin.Context) {
 		return
 	}
 
-	// TODO: Si create
 	ctx.JSON(http.StatusOK, category)
 }
 
 func (cc *CategoryController) Create(ctx *gin.Context) {
+	category := new(post_entities.Category)
 
+	bindError := ctx.BindJSON(&category)
+	if bindError != nil {
+		msg := "Could not bind json"
+		log.Error(fmt.Sprintf("%s for category %v", msg, category))
+		ctx.JSON(http.StatusBadRequest,
+			problemDetailImpl.NewOfHttpError(httpErrors.HttpBadRequestError).Detail(msg))
+		return
+	}
+
+	id, err := cc.service.Create(category)
+	if err != nil {
+		log.Warn(fmt.Sprintf("Could not create category %v", err.Error()))
+		ctx.JSON(http.StatusInternalServerError,
+			problemDetailImpl.NewOfHttpError(httpErrors.HttpInternalServerError).
+				Detail(err.Error()))
+		return
+	}
+	ctx.JSON(http.StatusCreated, id)
+	return
 }
 
 func New(service interfaces.CategoryService) *CategoryController {

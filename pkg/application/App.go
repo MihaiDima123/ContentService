@@ -1,6 +1,7 @@
 package application
 
 import (
+	"contentservice/pkg/application/core/cors"
 	"contentservice/pkg/application/initialisation"
 	categoryModule "contentservice/pkg/application/modules/category"
 	"contentservice/pkg/application/modules/content"
@@ -26,6 +27,7 @@ func (app *App) Configure() *App {
 
 	// Backend server
 	app.Server = server.New()
+	app.Server.AddMiddleware(cors.CORSMiddleware())
 
 	// Swag
 	app.UiServer = server.NewUiServer()

@@ -13,7 +13,7 @@ type CategoryServiceImpl struct {
 	repository interfaces.CategoryRepository
 }
 
-func (c CategoryServiceImpl) GetById(id int64) (*post_entities.Category, customerrors.HTTPError) {
+func (c *CategoryServiceImpl) GetById(id int64) (*post_entities.Category, customerrors.HTTPError) {
 	category, err := c.repository.GetById(id)
 
 	if customErrors.Is(err, dbErrors.DbResourceNotFoundType) {
@@ -27,7 +27,7 @@ func (c CategoryServiceImpl) GetById(id int64) (*post_entities.Category, custome
 	return category, nil
 }
 
-func (c CategoryServiceImpl) Create(category post_entities.Category) (int64, customerrors.HTTPError) {
+func (c *CategoryServiceImpl) Create(category *post_entities.Category) (int64, customerrors.HTTPError) {
 	id, err := c.repository.Create(category)
 
 	if customErrors.Is(err, dbErrors.DbResourceNotCreatedType) || err != nil {

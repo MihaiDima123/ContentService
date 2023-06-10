@@ -26,8 +26,8 @@ func (cr *ContentRepositoryImpl) Configure(configuration restful.RepositoryConfi
 	cr.dbConn = configuration.Connection
 }
 
-func (cr *ContentRepositoryImpl) Create(post post_entities.Post) (int64, errorsInterface.DbError) {
-	result := cr.dbConn.Table(PostTableName).Create(&post)
+func (cr *ContentRepositoryImpl) Create(post *post_entities.Post) (int64, errorsInterface.DbError) {
+	result := cr.dbConn.Table(PostTableName).Create(post)
 
 	if result.Error != nil {
 		return post.ID, dbErrors.DbNotCreatedError

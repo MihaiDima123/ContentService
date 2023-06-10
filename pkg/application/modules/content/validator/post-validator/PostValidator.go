@@ -21,7 +21,7 @@ type PostValidator struct {
 	validator.Validator[post_entities.Post]
 }
 
-func (pv *PostValidator) Validate(post post_entities.Post) []customerrors.ValidationError {
+func (pv *PostValidator) Validate(post *post_entities.Post) []customerrors.ValidationError {
 	var errors []customerrors.ValidationError
 
 	if validatorImpl.ValueLessThan(post.UserEmail, MinEmailLength) {

@@ -48,7 +48,7 @@ func (rcc *RestfulContentController) GetPostById(context *gin.Context) {
 }
 
 func (rcc *RestfulContentController) CreatePost(context *gin.Context) {
-	post := post_entities.Post{}
+	post := new(post_entities.Post)
 	err := context.BindJSON(&post)
 
 	if err != nil {

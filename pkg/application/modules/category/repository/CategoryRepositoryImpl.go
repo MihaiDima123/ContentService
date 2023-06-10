@@ -16,12 +16,12 @@ type CategoryRepository struct {
 	dbConn *gorm.DB
 }
 
-func (c CategoryRepository) Configure(configuration restful.RepositoryConfiguration) {
+func (c *CategoryRepository) Configure(configuration restful.RepositoryConfiguration) {
 	c.dbConn = configuration.Connection
 }
 
-func (c CategoryRepository) Create(data post_entities.Category) (int64, customerrors.DbError) {
-	result := c.dbConn.Table(CategoryTableName).Create(&data)
+func (c *CategoryRepository) Create(data *post_entities.Category) (int64, customerrors.DbError) {
+	result := c.dbConn.Table(CategoryTableName).Create(data)
 	if result.Error != nil {
 		return 0, dbErrors.DbNotCreatedError
 	}
@@ -29,7 +29,7 @@ func (c CategoryRepository) Create(data post_entities.Category) (int64, customer
 	return data.ID, nil
 }
 
-func (c CategoryRepository) GetById(id int64) (*post_entities.Category, customerrors.DbError) {
+func (c *CategoryRepository) GetById(id int64) (*post_entities.Category, customerrors.DbError) {
 	category := new(post_entities.Category)
 	err := c.dbConn.Table(CategoryTableName).Where("id = ?", id).First(category).Error
 

@@ -11,5 +11,5 @@ type ErrorType struct {
 
 // Is checks if an error is of type
 func Is(httpError customerrors.CustomError, et *ErrorType) bool {
-	return httpError.GetErrorType() == et.Value
+	return httpError != nil && httpError.GetErrorType() == et.Value
 }

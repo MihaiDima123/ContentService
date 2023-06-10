@@ -39,7 +39,7 @@ func (csi *ContentServiceImpl) GetById(id int64) (*post_entities.Post, errorInte
 	return post, httpErrors.HttpInternalServerError
 }
 
-func (csi *ContentServiceImpl) Create(post post_entities.Post) (int64, errorInterfaces.HTTPError) {
+func (csi *ContentServiceImpl) Create(post *post_entities.Post) (int64, errorInterfaces.HTTPError) {
 	if validatorErrors := csi.postValidator.Validate(post); len(validatorErrors) != 0 {
 		return 0, httpErrors.HttpBadRequestError
 	}
