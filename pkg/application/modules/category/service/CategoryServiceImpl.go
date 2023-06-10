@@ -31,7 +31,7 @@ func (c *CategoryServiceImpl) Create(category *post_entities.Category) (int64, c
 	id, err := c.repository.Create(category)
 
 	if customErrors.Is(err, dbErrors.DbResourceNotCreatedType) || err != nil {
-		return 0, httpErrors.HttpInternalServerError
+		return 0, httpErrors.GetInternalServerError(err.Error())
 	}
 
 	return id, nil

@@ -23,7 +23,7 @@ func (c *CategoryRepository) Configure(configuration restful.RepositoryConfigura
 func (c *CategoryRepository) Create(data *post_entities.Category) (int64, customerrors.DbError) {
 	result := c.dbConn.Table(CategoryTableName).Create(data)
 	if result.Error != nil {
-		return 0, dbErrors.DbNotCreatedError
+		return 0, dbErrors.GetResourceNotCreatedError(result.Error.Error())
 	}
 
 	return data.ID, nil

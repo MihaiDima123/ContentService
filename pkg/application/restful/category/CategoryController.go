@@ -41,10 +41,10 @@ func (cc *CategoryController) Create(ctx *gin.Context) {
 
 	bindError := ctx.BindJSON(&category)
 	if bindError != nil {
-		msg := "Could not bind json"
-		log.Error(fmt.Sprintf("%s for category %v", msg, category))
+		log.Error(fmt.Sprintf("%s for category %v", bindError.Error(), category))
 		ctx.JSON(http.StatusBadRequest,
-			problemDetailImpl.NewOfHttpError(httpErrors.HttpBadRequestError).Detail(msg))
+			problemDetailImpl.NewOfHttpError(httpErrors.HttpBadRequestError).
+				Detail(bindError.Error()))
 		return
 	}
 
