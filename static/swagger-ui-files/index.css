@@ -1,3 +1,5 @@
+
+
 html {
     box-sizing: border-box;
     overflow: -moz-scrollbars-vertical;
@@ -8,6 +10,7 @@ html {
 *:before,
 *:after {
     box-sizing: inherit;
+    font-family: Roboto, sans-serif !important;
 }
 
 body {

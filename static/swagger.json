@@ -1,9 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "1.0.6",
-    "title": "Swagger Petstore",
-    "termsOfService": "http://swagger.io/terms/"
+    "version": "1.0.0",
+    "title": "Content"
   },
   "paths": {
   }
