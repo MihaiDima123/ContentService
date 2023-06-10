@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
-	"time"
 )
 
 type PostgresDataSource struct {
@@ -36,14 +35,18 @@ func (ds *PostgresDataSource) Configure() {
 	db, err := gorm.Open(
 		postgres.Open(getConnectionString(ds.configuration)), new(gorm.Config))
 
-	databaseConn, _ := db.DB()
-	databaseConn.SetMaxIdleConns(10)
-	databaseConn.SetMaxOpenConns(20)
-	databaseConn.SetConnMaxLifetime(time.Hour)
-
 	if err != nil {
 		log.Error("Could not open database connection" + err.Error())
 		panic(err)
+	}
+
+	databaseConn, dbConnErr := db.DB()
+	databaseConn.SetMaxIdleConns(10)
+	databaseConn.SetMaxOpenConns(100)
+
+	if dbConnErr != nil {
+		log.Error("Database error" + dbConnErr.Error())
+		panic(dbConnErr)
 	}
 
 	ds.Conn = db
