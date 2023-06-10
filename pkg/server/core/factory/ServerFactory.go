@@ -12,3 +12,10 @@ func GetContentServer() serverInterface.Server {
 
 	return cs
 }
+
+func GetUiServer() serverInterface.Server {
+	us := new(servers.UiServer)
+	us.Router = gin.Default()
+
+	return us
+}

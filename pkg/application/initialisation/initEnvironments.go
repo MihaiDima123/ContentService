@@ -8,6 +8,7 @@ import (
 )
 
 const appPortName string = "APP_PORT"
+const uiPortName string = "UI_PORT"
 const datasourceHost string = "DATASOURCE_HOST"
 const datasourcePort string = "DATASOURCE_PORT"
 const datasourceDatabase string = "DATASOURCE_DATABASE"
@@ -16,6 +17,7 @@ const datasourcePassword string = "DATASOURCE_PASSWORD"
 
 type Environment struct {
 	AppPort            uint16
+	UiPort             uint16
 	DatasourceHost     string
 	DatasourcePort     uint16
 	DatasourceDatabase string
@@ -36,6 +38,7 @@ func InitEnv() Environment {
 func getEnvs() Environment {
 	return Environment{
 		AppPort:            parseIntEnv(os.Getenv(appPortName)),
+		UiPort:             parseIntEnv(os.Getenv(uiPortName)),
 		DatasourceHost:     os.Getenv(datasourceHost),
 		DatasourcePort:     parseIntEnv(os.Getenv(datasourcePort)),
 		DatasourceDatabase: os.Getenv(datasourceDatabase),

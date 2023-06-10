@@ -14,6 +14,7 @@ import (
 
 type App struct {
 	Server       serverInt.Server
+	UiServer     serverInt.Server
 	DataSource   ds.Datasource
 	environments initialisation.Environment
 }
@@ -23,7 +24,11 @@ func (app *App) Configure() *App {
 	app.environments = initialisation.InitEnv() // Init the environments
 	app.DataSource = app.getDataSource()        // Then the data source
 
+	// Backend server
 	app.Server = server.New()
+
+	// Swag
+	app.UiServer = server.NewUiServer()
 
 	// Content
 	content.NewContentModule().Use(&restful.ModuleConfiguration{
@@ -44,6 +49,15 @@ func (app *App) Start() error {
 	err := app.Server.StartServer(app.environments.AppPort)
 	if err != nil {
 		log.Error("Failed to start the server")
+		return err
+	}
+	return nil
+}
+
+func (app *App) StartUiServer() error {
+	err := app.UiServer.StartServer(app.environments.UiPort)
+	if err != nil {
+		log.Error("Failed to start the UI server")
 		return err
 	}
 	return nil

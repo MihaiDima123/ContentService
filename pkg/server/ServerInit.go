@@ -8,3 +8,7 @@ import (
 func New() server.Server {
 	return serverFactory.GetContentServer()
 }
+
+func NewUiServer() server.Server {
+	return serverFactory.GetUiServer()
+}
