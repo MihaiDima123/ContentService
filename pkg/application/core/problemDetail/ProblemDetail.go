@@ -56,7 +56,6 @@ func NewOfValidationError(err customerrors.ValidationError) problemDetail.Proble
 	pd := new(ProblemDetailImpl)
 	pd.Status(http.StatusBadRequest)
 	pd.Detail(err.Error())
-	pd.Title(err.GetTitle())
 	pd.Instance(err.GetSource())
 	return pd
 }

@@ -45,14 +45,15 @@ func (cc *CategoryController) Create(ctx *gin.Context) {
 
 	if bindErr != nil {
 		log.Error(bindErr.Error())
-		ctx.JSON(http.StatusBadRequest, problemDetailImpl.NewOfValidationError(bindErr))
+		ctx.JSON(http.StatusBadRequest, problemDetailImpl.NewOfValidationError(bindErr).Title("Parse"))
 		return
 	}
 
 	id, err := cc.service.Create(category)
 	if err != nil {
 		log.OfStatus(err.GetStatus(), err.Error())
-		ctx.JSON(err.GetStatus(), problemDetailImpl.NewOfHttpError(err).Title("Could not create category"))
+		ctx.JSON(err.GetStatus(), problemDetailImpl.NewOfHttpError(err).Instance("Category").
+			Title("Create category"))
 		return
 	}
 	ctx.JSON(http.StatusCreated, idWrapper.Of(id))
@@ -64,7 +65,7 @@ func getCategoryFromBody(ctx *gin.Context) (*categoryDto.CategoryDTO, customerro
 
 	bindErr := ctx.BindJSON(&category)
 	if bindErr != nil {
-		return nil, validationErrors.GetParseError(validationInstance.New("Body", bindErr.Error()))
+		return nil, validationErrors.GetParseError(validationInstance.New("Request body", bindErr.Error()))
 	}
 	return category, nil
 }

@@ -21,7 +21,6 @@ func GetTooShortError(instance validator.ValidationInstance) customerrors.Valida
 	return &CustomValidationError{
 		error:     utils.GetErrorFromString(TooShortErrorType.DefaultMessage, instance.Message()),
 		Source:    instance.Instance(),
-		Title:     "Short",
 		ErrorType: TooShortErrorType.Value,
 	}
 }
@@ -30,7 +29,6 @@ func GetParseError(instance validator.ValidationInstance) customerrors.Validatio
 	return &CustomValidationError{
 		error:     utils.GetErrorFromString(CouldNotParseErrorType.DefaultMessage, instance.Message()),
 		Source:    instance.Instance(),
-		Title:     "Parse",
 		ErrorType: CouldNotParseErrorType.Value,
 	}
 }
