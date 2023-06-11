@@ -2,7 +2,7 @@ package content
 
 import (
 	parseParam "contentservice/pkg/application/core/parse-param"
-	"contentservice/pkg/application/entity/post_entities"
+	postDto "contentservice/pkg/application/dto/post"
 	"contentservice/pkg/application/modules/content/interfaces"
 	errorsInterface "contentservice/pkg/interfaces/customerrors"
 	"contentservice/pkg/server/log"
@@ -48,7 +48,7 @@ func (rcc *RestfulContentController) GetPostById(context *gin.Context) {
 }
 
 func (rcc *RestfulContentController) CreatePost(context *gin.Context) {
-	post := new(post_entities.Post)
+	post := new(postDto.PostDTO)
 	err := context.BindJSON(&post)
 
 	if err != nil {

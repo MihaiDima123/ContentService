@@ -12,10 +12,25 @@ var TooShortErrorType = customErrors.ErrorType{
 	DefaultMessage: "Too short",
 }
 
+var CouldNotParseErrorType = customErrors.ErrorType{
+	Value:          2,
+	DefaultMessage: "Could not parse",
+}
+
 func GetTooShortError(instance validator.ValidationInstance) customerrors.ValidationError {
 	return &CustomValidationError{
 		error:     utils.GetErrorFromString(TooShortErrorType.DefaultMessage, instance.Message()),
 		Source:    instance.Instance(),
+		Title:     "Short",
 		ErrorType: TooShortErrorType.Value,
+	}
+}
+
+func GetParseError(instance validator.ValidationInstance) customerrors.ValidationError {
+	return &CustomValidationError{
+		error:     utils.GetErrorFromString(CouldNotParseErrorType.DefaultMessage, instance.Message()),
+		Source:    instance.Instance(),
+		Title:     "Parse",
+		ErrorType: CouldNotParseErrorType.Value,
 	}
 }

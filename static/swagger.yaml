@@ -20,7 +20,7 @@ components:
         name:
           type: string
           required: true
-        tenant_id:
+        tenantId:
           type: integer
           required: true
     "idWrapper":
@@ -43,7 +43,7 @@ paths:
               $ref: "#/components/schemas/category"
             example:
               name: Sample Category
-              tenant_id: 1
+              tenantId: 1
       responses:
         201:
           description: Category successfully created

@@ -3,11 +3,14 @@ package categoryController
 import (
 	"contentservice/pkg/application/core/customErrors"
 	"contentservice/pkg/application/core/customErrors/httpErrors"
+	validationErrors "contentservice/pkg/application/core/customErrors/validation-errors"
 	idWrapper "contentservice/pkg/application/core/entities/wrappers"
 	"contentservice/pkg/application/core/parse-param"
 	problemDetailImpl "contentservice/pkg/application/core/problemDetail"
-	"contentservice/pkg/application/entity/post_entities"
+	validationInstance "contentservice/pkg/application/core/validator/instance"
+	categoryDto "contentservice/pkg/application/dto/category"
 	"contentservice/pkg/application/modules/category/interfaces"
+	"contentservice/pkg/interfaces/customerrors"
 	"contentservice/pkg/server/log"
 	"fmt"
 	"github.com/gin-gonic/gin"
@@ -38,16 +41,11 @@ func (cc *CategoryController) GetById(ctx *gin.Context) {
 }
 
 func (cc *CategoryController) Create(ctx *gin.Context) {
-	category := new(post_entities.Category)
+	category, bindErr := getCategoryFromBody(ctx)
 
-	bindError := ctx.BindJSON(&category)
-
-	// TODO: Do something for response.sendError()...
-	if bindError != nil {
-		log.Error(fmt.Sprintf("%s for category %v", bindError.Error(), category))
-		ctx.JSON(http.StatusBadRequest,
-			problemDetailImpl.NewOfHttpError(httpErrors.HttpBadRequestError).
-				Detail("Could not parse the request body"))
+	if bindErr != nil {
+		log.Error(bindErr.Error())
+		ctx.JSON(http.StatusBadRequest, problemDetailImpl.NewOfValidationError(bindErr))
 		return
 	}
 
@@ -59,6 +57,16 @@ func (cc *CategoryController) Create(ctx *gin.Context) {
 	}
 	ctx.JSON(http.StatusCreated, idWrapper.Of(id))
 	return
+}
+
+func getCategoryFromBody(ctx *gin.Context) (*categoryDto.CategoryDTO, customerrors.ValidationError) {
+	category := new(categoryDto.CategoryDTO)
+
+	bindErr := ctx.BindJSON(&category)
+	if bindErr != nil {
+		return nil, validationErrors.GetParseError(validationInstance.New("Body", bindErr.Error()))
+	}
+	return category, nil
 }
 
 func New(service interfaces.CategoryService) *CategoryController {

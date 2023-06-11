@@ -25,17 +25,17 @@ func (c *CategoryServiceImpl) GetById(id int64) (*categoryDto.CategoryDTO, custo
 		return nil, httpErrors.HttpInternalServerError
 	}
 
-	return categoryDto.New(category), nil
+	return post_entities.ToCategoryDTO(category), nil
 }
 
-func (c *CategoryServiceImpl) Create(category *post_entities.Category) (*int64, customerrors.HTTPError) {
+func (c *CategoryServiceImpl) Create(category *categoryDto.CategoryDTO) (*int64, customerrors.HTTPError) {
 	validateError := c.validateCategoryName(category.Name, category.TenantId)
 
 	if validateError != nil {
 		return nil, validateError
 	}
 
-	id, err := c.repository.Create(category)
+	id, err := c.repository.Create(post_entities.NewCategory(category))
 
 	if customErrors.Is(err, dbErrors.DbResourceNotCreatedType) || err != nil {
 		return nil, httpErrors.GetInternalServerError(err.Error())

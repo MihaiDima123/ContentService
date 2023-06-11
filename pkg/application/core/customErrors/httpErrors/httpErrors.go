@@ -15,12 +15,12 @@ var NotFoundErrorType = &customErrors.ErrorType{
 
 var InternalServerErrorType = &customErrors.ErrorType{
 	Value:          2,
-	DefaultMessage: "not created",
+	DefaultMessage: "internal server error",
 }
 
 var BadRequestErrorType = &customErrors.ErrorType{
 	Value:          3,
-	DefaultMessage: "internal server error",
+	DefaultMessage: "bad request",
 }
 
 // HttpNotFoundError Constants

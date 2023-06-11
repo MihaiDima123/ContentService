@@ -3,11 +3,11 @@ package problemDetailImpl
 import (
 	"contentservice/pkg/interfaces/customerrors"
 	problemDetail "contentservice/pkg/interfaces/problem-detail"
+	"net/http"
 )
 
 // ProblemDetailImpl Problem detail implementation to return my custom errors
 type ProblemDetailImpl struct {
-	problemDetail.ProblemDetail[customerrors.CustomError]
 	TitleProp      string                     `json:"title"`
 	StatusProp     int                        `json:"status"`
 	InstanceProp   string                     `json:"instance"`
@@ -49,5 +49,14 @@ func NewOfHttpError(error customerrors.HTTPError) problemDetail.ProblemDetail[cu
 	pd.Status(error.GetStatus())
 	pd.Detail(error.Error())
 
+	return pd
+}
+
+func NewOfValidationError(err customerrors.ValidationError) problemDetail.ProblemDetail[customerrors.CustomError] {
+	pd := new(ProblemDetailImpl)
+	pd.Status(http.StatusBadRequest)
+	pd.Detail(err.Error())
+	pd.Title(err.GetTitle())
+	pd.Instance(err.GetSource())
 	return pd
 }

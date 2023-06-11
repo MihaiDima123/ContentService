@@ -42,12 +42,12 @@ func (csi *ContentServiceImpl) GetById(id int64) (*postDto.PostDTO, errorInterfa
 	return postDto.New(), httpErrors.HttpInternalServerError
 }
 
-func (csi *ContentServiceImpl) Create(post *post_entities.Post) (*int64, errorInterfaces.HTTPError) {
-	if validatorErrors := csi.postValidator.Validate(post); len(validatorErrors) != 0 {
+func (csi *ContentServiceImpl) Create(post *postDto.PostDTO) (*int64, errorInterfaces.HTTPError) {
+	if validatorErrors := csi.postValidator.Validate(new(post_entities.Post)); len(validatorErrors) != 0 {
 		return nil, httpErrors.HttpBadRequestError
 	}
-
-	id, err := csi.contentRepository.Create(post)
+	// TODO: Change this
+	id, err := csi.contentRepository.Create(new(post_entities.Post))
 	if customErrors.Is(err, httpErrors.InternalServerErrorType) {
 		return nil, httpErrors.HttpInternalServerError
 	}
