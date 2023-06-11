@@ -1,11 +1,17 @@
 package categoryDto
 
+import (
+	"contentservice/pkg/application/entity/post_entities"
+)
+
 type CategoryDTO struct {
-	Id       int    `json:"id"`
 	Name     string `json:"name"`
-	TenantId string `json:"tenantId"`
+	TenantId int    `json:"tenantId"`
 }
 
-func New() *CategoryDTO {
-	return new(CategoryDTO)
+func New(category *post_entities.Category) *CategoryDTO {
+	c := new(CategoryDTO)
+	c.Name = category.Name
+	c.TenantId = category.TenantId
+	return c
 }

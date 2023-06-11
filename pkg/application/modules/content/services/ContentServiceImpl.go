@@ -3,6 +3,7 @@ package services
 import (
 	"contentservice/pkg/application/core/customErrors"
 	"contentservice/pkg/application/core/customErrors/httpErrors"
+	postDto "contentservice/pkg/application/dto/post"
 	"contentservice/pkg/application/entity/post_entities"
 	"contentservice/pkg/application/modules/content/interfaces"
 	errorInterfaces "contentservice/pkg/interfaces/customerrors"
@@ -26,17 +27,19 @@ func New(contentRepository interfaces.ContentRepository,
 	}
 }
 
-func (csi *ContentServiceImpl) GetById(id int64) (*post_entities.Post, errorInterfaces.HTTPError) {
-	post, err := csi.contentRepository.GetById(id)
+func (csi *ContentServiceImpl) GetById(id int64) (*postDto.PostDTO, errorInterfaces.HTTPError) {
+	// TODO: And this
+	_, err := csi.contentRepository.GetById(id)
 	if customErrors.Is(err, httpErrors.NotFoundErrorType) {
-		return post, httpErrors.HttpNotFoundError
+		return nil, httpErrors.HttpNotFoundError
 	}
 
 	if err != nil {
 		return nil, httpErrors.HttpInternalServerError
 	}
 
-	return post, httpErrors.HttpInternalServerError
+	// TODO: Change this
+	return postDto.New(), httpErrors.HttpInternalServerError
 }
 
 func (csi *ContentServiceImpl) Create(post *post_entities.Post) (int64, errorInterfaces.HTTPError) {

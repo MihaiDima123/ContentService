@@ -4,6 +4,7 @@ import (
 	"contentservice/pkg/application/core/customErrors"
 	dbErrors "contentservice/pkg/application/core/customErrors/db-errors"
 	"contentservice/pkg/application/core/customErrors/httpErrors"
+	categoryDto "contentservice/pkg/application/dto/category"
 	"contentservice/pkg/application/entity/post_entities"
 	"contentservice/pkg/application/modules/category/interfaces"
 	"contentservice/pkg/interfaces/customerrors"
@@ -15,7 +16,7 @@ type CategoryServiceImpl struct {
 	repository interfaces.CategoryRepository
 }
 
-func (c *CategoryServiceImpl) GetById(id int64) (*post_entities.Category, customerrors.HTTPError) {
+func (c *CategoryServiceImpl) GetById(id int64) (*categoryDto.CategoryDTO, customerrors.HTTPError) {
 	category, err := c.repository.GetById(id)
 
 	if customErrors.Is(err, dbErrors.DbResourceNotFoundType) {
@@ -26,7 +27,7 @@ func (c *CategoryServiceImpl) GetById(id int64) (*post_entities.Category, custom
 		return nil, httpErrors.HttpInternalServerError
 	}
 
-	return category, nil
+	return categoryDto.New(category), nil
 }
 
 func (c *CategoryServiceImpl) Create(category *post_entities.Category) (int64, customerrors.HTTPError) {

@@ -5,7 +5,6 @@ import (
 )
 
 type PostDTO struct {
-	Id           int64                           `json:"id"`
 	UserId       int                             `json:"userId"`
 	UserEmail    string                          `json:"userEmail"`
 	Contents     []postContentDto.PostContentDTO `json:"contents"`
