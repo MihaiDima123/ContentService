@@ -24,6 +24,10 @@ components:
         tenant_id:
           type: integer
           required: true
+    "idWrapper":
+      properties:
+        id:
+          type: integer
 
 paths:
   /category:
@@ -41,6 +45,10 @@ paths:
       responses:
         201:
           description: Category created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/idWrapper"
         400:
           description: Validation error, either your body isn't correct or the category already exists
         500:

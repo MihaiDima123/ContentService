@@ -3,6 +3,7 @@ package categoryController
 import (
 	"contentservice/pkg/application/core/customErrors"
 	"contentservice/pkg/application/core/customErrors/httpErrors"
+	idWrapper "contentservice/pkg/application/core/entities/wrappers"
 	"contentservice/pkg/application/core/parse-param"
 	problemDetailImpl "contentservice/pkg/application/core/problemDetail"
 	"contentservice/pkg/application/entity/post_entities"
@@ -54,7 +55,7 @@ func (cc *CategoryController) Create(ctx *gin.Context) {
 		ctx.JSON(err.GetStatus(), problemDetailImpl.NewOfHttpError(err).Title("Could not create category"))
 		return
 	}
-	ctx.JSON(http.StatusCreated, id)
+	ctx.JSON(http.StatusCreated, idWrapper.Of(id))
 	return
 }
 
