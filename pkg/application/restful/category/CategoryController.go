@@ -41,6 +41,8 @@ func (cc *CategoryController) Create(ctx *gin.Context) {
 	category := new(post_entities.Category)
 
 	bindError := ctx.BindJSON(&category)
+
+	// TODO: Do something for response.sendError()...
 	if bindError != nil {
 		log.Error(fmt.Sprintf("%s for category %v", bindError.Error(), category))
 		ctx.JSON(http.StatusBadRequest,
