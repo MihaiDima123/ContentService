@@ -28,24 +28,35 @@ func (c *CategoryServiceImpl) GetById(id int64) (*categoryDto.CategoryDTO, custo
 	return categoryDto.New(category), nil
 }
 
-func (c *CategoryServiceImpl) Create(category *post_entities.Category) (int64, customerrors.HTTPError) {
-	count, countingError := c.repository.GetCountByNameAndTenant(category.Name, category.TenantId)
+func (c *CategoryServiceImpl) Create(category *post_entities.Category) (*int64, customerrors.HTTPError) {
+	validateError := c.validateCategoryName(category.Name, category.TenantId)
 
-	if countingError != nil {
-		return 0, httpErrors.GetInternalServerError(countingError.Error())
-	}
-
-	if count != 0 {
-		return 0, httpErrors.GetBadRequestError("Category name not unique ", category.Name)
+	if validateError != nil {
+		return nil, validateError
 	}
 
 	id, err := c.repository.Create(category)
 
 	if customErrors.Is(err, dbErrors.DbResourceNotCreatedType) || err != nil {
-		return 0, httpErrors.GetInternalServerError(err.Error())
+		return nil, httpErrors.GetInternalServerError(err.Error())
 	}
 
 	return id, nil
+}
+
+// Validates if the category has a unique name
+func (c *CategoryServiceImpl) validateCategoryName(name string, tenantId int) customerrors.HTTPError {
+	count, countingError := c.repository.GetCountByNameAndTenant(name, tenantId)
+
+	if countingError != nil {
+		return httpErrors.GetInternalServerError(countingError.Error())
+	}
+
+	if count != 0 {
+		return httpErrors.GetBadRequestError("Category name not unique ", name)
+	}
+
+	return nil
 }
 
 func New(repository interfaces.CategoryRepository) interfaces.CategoryService {

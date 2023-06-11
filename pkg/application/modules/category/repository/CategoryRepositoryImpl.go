@@ -45,14 +45,14 @@ func (c *CategoryRepository) GetCountByNameAndTenant(name string, tenantId int) 
 	return cnt, nil
 }
 
-func (c *CategoryRepository) Create(data *post_entities.Category) (int64, customerrors.DbError) {
+func (c *CategoryRepository) Create(data *post_entities.Category) (*int64, customerrors.DbError) {
 	result := c.dbConn.Table(CategoryTableName).Create(data)
 
 	if result.Error != nil {
-		return 0, dbErrors.GetResourceNotCreatedError(result.Error.Error())
+		return nil, dbErrors.GetResourceNotCreatedError(result.Error.Error())
 	}
 
-	return data.ID, nil
+	return &data.ID, nil
 }
 
 func New() interfaces.CategoryRepository {

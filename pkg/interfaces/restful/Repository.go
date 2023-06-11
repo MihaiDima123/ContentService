@@ -7,7 +7,7 @@ import (
 
 type Repository[T any] interface {
 	Configure(configuration RepositoryConfiguration)
-	Create(data *T) (int64, customerrors.DbError)
+	Create(data *T) (*int64, customerrors.DbError)
 	GetById(id int64) (*T, customerrors.DbError)
 }
 
