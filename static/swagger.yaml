@@ -41,3 +41,5 @@ paths:
       responses:
         201:
           description: Category created
+        500:
+          description: Category cannot be created

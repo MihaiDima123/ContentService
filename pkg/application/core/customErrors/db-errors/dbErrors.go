@@ -16,9 +16,15 @@ var DbResourceNotCreatedType = &customErrors.ErrorType{
 	DefaultMessage: "resource not created",
 }
 
+var DbResourceNotFetchedType = &customErrors.ErrorType{
+	Value:          3,
+	DefaultMessage: "resource coould not be fetched",
+}
+
 // DbNotFoundError Constants
 var DbNotFoundError = GetResourceNotFoundError()
 var DbNotCreatedError = GetResourceNotCreatedError()
+var DbNotFetchedError = GetResourceNotFetchedError()
 
 var GetResourceNotFoundError = func(params ...string) customerrors.DbError {
 	return &CustomDbError{
@@ -31,5 +37,12 @@ var GetResourceNotCreatedError = func(params ...string) customerrors.DbError {
 	return &CustomDbError{
 		error:     utils.GetErrorFromString(DbResourceNotCreatedType.DefaultMessage, params...),
 		ErrorType: DbResourceNotCreatedType.Value,
+	}
+}
+
+var GetResourceNotFetchedError = func(params ...string) customerrors.DbError {
+	return &CustomDbError{
+		error:     utils.GetErrorFromString(DbResourceNotFetchedType.DefaultMessage, params...),
+		ErrorType: DbResourceNotFetchedType.Value,
 	}
 }

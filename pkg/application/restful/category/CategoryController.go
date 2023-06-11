@@ -44,16 +44,14 @@ func (cc *CategoryController) Create(ctx *gin.Context) {
 		log.Error(fmt.Sprintf("%s for category %v", bindError.Error(), category))
 		ctx.JSON(http.StatusBadRequest,
 			problemDetailImpl.NewOfHttpError(httpErrors.HttpBadRequestError).
-				Detail(bindError.Error()))
+				Detail("Could not parse the request body"))
 		return
 	}
 
 	id, err := cc.service.Create(category)
 	if err != nil {
-		log.Warn(fmt.Sprintf("Could not create category %v", err.Error()))
-		ctx.JSON(http.StatusInternalServerError,
-			problemDetailImpl.NewOfHttpError(httpErrors.HttpInternalServerError).
-				Detail(err.Error()))
+		log.OfStatus(err.GetStatus(), err.Error())
+		ctx.JSON(err.GetStatus(), problemDetailImpl.NewOfHttpError(err).Title("Could not create category"))
 		return
 	}
 	ctx.JSON(http.StatusCreated, id)

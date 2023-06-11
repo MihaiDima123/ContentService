@@ -7,6 +7,8 @@ import (
 	"contentservice/pkg/application/entity/post_entities"
 	"contentservice/pkg/application/modules/category/interfaces"
 	"contentservice/pkg/interfaces/customerrors"
+	"contentservice/pkg/server/log"
+	"fmt"
 )
 
 type CategoryServiceImpl struct {
@@ -28,6 +30,18 @@ func (c *CategoryServiceImpl) GetById(id int64) (*post_entities.Category, custom
 }
 
 func (c *CategoryServiceImpl) Create(category *post_entities.Category) (int64, customerrors.HTTPError) {
+	count, countingError := c.repository.GetCountByNameAndTenant(category.Name, category.TenantId)
+
+	if countingError != nil {
+		return 0, httpErrors.GetInternalServerError(countingError.Error())
+	}
+
+	if count != 0 {
+		msg := fmt.Sprintf("Category name not unique: %s", category.Name)
+		log.Warn(msg)
+		return 0, httpErrors.GetBadRequestError(msg)
+	}
+
 	id, err := c.repository.Create(category)
 
 	if customErrors.Is(err, dbErrors.DbResourceNotCreatedType) || err != nil {

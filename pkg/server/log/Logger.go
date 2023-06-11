@@ -1,6 +1,9 @@
 package log
 
-import "contentservice/pkg/interfaces/logging"
+import (
+	"contentservice/pkg/interfaces/logging"
+	"net/http"
+)
 
 var logger logging.Logger
 
@@ -22,6 +25,14 @@ func Warn(m string) {
 
 func Error(m string) {
 	logger.Error(m)
+}
+
+func OfStatus(status int, m string) {
+	if status == http.StatusInternalServerError {
+		Error(m)
+		return
+	}
+	Warn(m)
 }
 
 func SetLevel(level uint8) {

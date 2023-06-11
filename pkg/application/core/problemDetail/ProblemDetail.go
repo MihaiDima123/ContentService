@@ -44,18 +44,10 @@ func New() problemDetail.ProblemDetail[customerrors.CustomError] {
 	return new(ProblemDetailImpl)
 }
 
-func NewOfStatusAndTitle(status int, title string) problemDetail.ProblemDetail[customerrors.CustomError] {
-	pd := new(ProblemDetailImpl)
-	pd.Status(status)
-	pd.Title(title)
-
-	return pd
-}
-
 func NewOfHttpError(error customerrors.HTTPError) problemDetail.ProblemDetail[customerrors.CustomError] {
 	pd := new(ProblemDetailImpl)
 	pd.Status(error.GetStatus())
-	pd.Title(error.Error())
+	pd.Detail(error.Error())
 
 	return pd
 }
