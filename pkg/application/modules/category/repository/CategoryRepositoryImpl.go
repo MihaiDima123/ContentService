@@ -33,7 +33,7 @@ func (c *CategoryRepository) GetById(id int64) (*post_entities.Category, custome
 
 func (c *CategoryRepository) GetCountByNameAndTenant(name string, tenantId int) (count int64, dbError customerrors.DbError) {
 	var cnt int64
-	err := c.dbConn.Debug().Table(CategoryTableName).
+	err := c.dbConn.Table(CategoryTableName).
 		Select("id").
 		Where("name = ? AND tenant_id=?", name, tenantId).
 		Count(&cnt).Error
